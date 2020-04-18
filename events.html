@@ -20,9 +20,8 @@
     <img id="logo"  src="logo.png"
     >
  </a>
-  <a href="#home" >Home</a>
-  <a href="#news">News</a>
-  <a href="events.html" class="active">Events</a>
+  <a href="#home" class="active">Home</a>
+  <a href="events.html">Events</a>
   <a href="#contact">Contact</a>
   <a href="#about">About</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -33,28 +32,31 @@
 <br>
 
  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
-</head>
-<body>
- 
-<div w-type="event-discovery" w-tmapikey="eXCCC9X1aXPUfjmWpbIbyj4X7jpIwH1H" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="" w-theme="simple" w-colorscheme="light" w-width="350" w-height="600" w-size="25" w-border="0" w-borderradius="4" w-postalcode="" w-radius="25" w-city="Peterborough" w-period="year" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-sorting="groupByName" w-id="id_lqttl" w-countrycode="GB" w-source="" w-branding="Ticketmaster" w-latlong=""></div>
 
-
-<script>
-function myFunction() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
+  <body>
+    <div class="eventsintroduction">
+    <p>Events</p>
+    <p>This page allows you to see all of the shows going on at Peterborough</p>
+  </div>
+   <div class="eventbox" align="right">
+  <div w-type="event-discovery" w-tmapikey="eXCCC9X1aXPUfjmWpbIbyj4X7jpIwH1H" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="" w-theme="simple" w-colorscheme="light" w-width="200" w-height="600" w-size="25" w-border="0" w-borderradius="4" w-postalcode="" w-radius="25" w-city="Peterborough" w-period="year" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-sorting="groupByName" w-id="id_lqttl" w-countrycode="GB" w-source="" w-branding="Ticketmaster" w-latlong=""></div>
+  </div>
+  
+  <script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
   }
-}
-</script>
-<script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
-</body>
+  </script>
+  <script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
+  </body>
 
 
 </html>
 
 
 </body>
-
