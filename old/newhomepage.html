@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="neweststylesheet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+</head>
+<body >
+
+    <div class="topnav" id="myTopnav">
+        <a id="logolink" href="homepage.html">
+          <img id="logo"  src="logo.png"
+          >
+       </a>
+        <a href="#home" class="active">Home</a>
+        <a href="events.html">Events</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+      </div>
+      <br>
+      
+
+<div class="row">
+  <div class="col-3 col-s-3 menu">
+    <div class="introparagraph">
+        <p>
+      Welcome to GoPeterborough.<br>
+      On this site you can see information regarding what to do around Peterborough, where to eat, what to see and the local weather.
+        </p>
+      </div>
+  </div>
+  <br>
+  <div class="col-5 col-s-9">
+     <!-- Swiper -->
+     <div class="swiper-container" >
+      <div class="swiper-wrapper" >
+        <div class="swiper-slide" ><img class="swiperimages" src="images/image1.jpg" >    <div class="swipertext">Queensgate</div></div>
+        <div class="swiper-slide" ><img class="swiperimages" src="images/image2.jpg"> <div class="swipertext">Peterborough Cathedral</div></div>
+        <div class="swiper-slide" ><img class="swiperimages" src="images/image3.jpg" > <div class="swipertext">Ferry Meadows</div></div>
+      </div>
+  
+      <!-- Add Arrows -->
+      <div class="swiper-button-next swiper-button-black" ></div>
+      <div class="swiper-button-prev swiper-button-black"></div>
+    </div>
+    </div>
+
+  <div class="col-3 col-s-12">
+  <div class ="weather">
+
+        <h1>Weather</h1>
+  
+    
+
+          <h1   id="location"></h1>
+      <h1   id="description"></h1>
+      <h1 id="temp"></h1>
+
+
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Follow us on Facebook, Twitter and Instagram</p>
+  <a href="https://www.facebook.com/Visit-Peterborough-107213310962419/"> <img class="footerimage" src="images/fblogo.png"/>
+  <a href="https://twitter.com/VisitPeterboro1"> <img class="footerimage" src="images/twitterlogo.png" />
+  <a href="https://www.instagram.com/visitpeterborough20/"> <img class="footerimage" src="images/instagramlogo.png"/>
+
+
+</div>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'progressbar',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+
+  
+<script lang="text/javascript">
+    const key = '9412a6dd4a7d4295985d183212bcb671';
+    if(key=='') document.getElementById('temp').innerHTML = ('Remember to add your api key!');
+    
+    function weatherBallon( cityID ) {
+        fetch('https://api.openweathermap.org/data/2.5/weather?id=' + cityID+ '&appid=' + key)  
+        .then(function(resp) { return resp.json() }) // Convert data to json
+        .then(function(data) {
+            drawWeather(data);
+        })
+        .catch(function() {
+            // catch any errors
+        });
+    }
+    function drawWeather( d ) {
+      var celcius = Math.round(parseFloat(d.main.temp)-273.15);
+        var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8)+32);
+      var description = d.weather[0].description; 
+        
+        document.getElementById('description').innerHTML = description;
+        document.getElementById('temp').innerHTML = celcius + '&deg;';
+        document.getElementById('location').innerHTML = d.name;
+      
+      if( description.indexOf('rain') > 0 ) {
+          document.h1.className = 'rainy';
+      } else if( description.indexOf('cloud') > 0 ) {
+          document.h1.className = 'cloudy';
+      } else if( description.indexOf('sunny') > 0 ) {
+          document.h1.className = 'sunny';
+      } else {
+          document.h1.className = 'clear';
+      }
+    }
+    window.onload = function() {
+        weatherBallon( 2640354 );
+    }
+    
+      </script>
+<script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    </script>
+
+
+</body>
+</html>
