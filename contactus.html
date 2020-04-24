@@ -1,23 +1,82 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Geolocation</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="neweststylesheet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+<style>
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height: 50%;
+    width: 40%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+</head>
+<body >
+
+    <div class="topnav" id="myTopnav">
+        <a id="logolink" href="homepage.html">
+          <img id="logo"  src="logo.png"
+          >
+       </a>
+        <a href="#home" class="active">Home</a>
+        <a href="events.html">Events</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+      </div>
+      <br>
+      
+
+<div class="row">
+  <div class="col-3 col-s-3 menu">
+    <div class="introparagraph">
+        <br>
+        <p>
+           Please fill in the form below to contact us 
+            <form action="/action_page.php" class="form-container">
+
+                <table style="margin-right:10px;">
+                  <tr>
+                    <td align="right">Name:</td>
+                    <td align="left"><input type="text" placeholder="Enter Name" name="name" required/> </td>
+                  </tr>
+                  <tr>
+                    <td align="right">Email:</td>
+                    <td align="left"><input type="email" placeholder="Enter Email" name="email" required/></td>
+                  </tr>
+                  <tr>
+                    <td align="right">Message:</td>
+                    <td align="left"><input type="text" placeholder="Enter your message" name="message" required /></td>
+                  </tr>
+                </table>
+              </form>
+              <br>
+              Or call us: Visit Peterborough
+              <br> 
+              <a href="tel:01733 214466">01733 214466</a>
+            
+      </div>
+  </div><!DOCTYPE html>
+<html>
   <head>
-    <title>Geolocation</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 50%;
-        width: 40%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+
+
   </head>
   <body>
     <div id="map"></div>
