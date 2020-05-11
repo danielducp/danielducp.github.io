@@ -1,0 +1,127 @@
+  <h1>My First Google Map</h1>
+
+    <div id="theMap" style="width:60%;height:800px;"></div>
+
+    <script>
+        function detectBrowser() {
+            var useragent = navigator.userAgent;
+            var mapdiv = document.getElementById("map");
+
+            if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1) {
+                mapdiv.style.width = '100%';
+                mapdiv.style.height = '100%';
+            } else {
+                mapdiv.style.width = '600px';
+                mapdiv.style.height = '800px';
+            }
+        }
+
+        var mylocationdata;
+        var latit;
+        var longit;
+
+        function geoSuccess(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            mylocationdata = {
+                lat: latitude,
+                lng: longitude
+            };
+            var mapProp = {
+                zoom: 9,
+                mapTypeId: 'roadmap',
+
+            };
+            var map = new google.maps.Map(document.getElementById("theMap"), mapProp);
+
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+
+            directionsDisplay.setMap(map);
+
+            var bounds = new google.maps.LatLngBounds();
+      
+ 
+            var marker = new google.maps.Marker({
+                position: mylocationdata,
+                map: map,
+                title: 'Where I currently am'
+            });
+            var markers = [
+                ['University Centre Peteborough', 52.5865547, -0.232581],
+               
+                ['My Current Location', latitude, longitude]
+            ];
+
+            var infoWindowContent = [
+                ['<div class="info_content">' +
+                    '<h3>University Centre Peteborough</h3>' +
+                    '<p>University Centre Peterborough, Park Crescent Campus, Peterborough, Cambridgeshire, PE1 4DZ</p>' +
+                    '</div>'
+                ],
+           
+            ];
+
+            var infoWindow = new google.maps.InfoWindow(),
+                marker, i;
+
+            for (i = 0; i < markers.length; i++) {
+                var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+                bounds.extend(position);
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: markers[i][0]
+                });
+
+                // Allow each marker to have an info window
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infoWindow.setContent(infoWindowContent[i][0]);
+                        infoWindow.open(map, marker);
+
+                        latit = marker.getPosition().lat();
+                        longit = marker.getPosition().lng();
+               
+                    }
+                })(marker, i));
+
+                marker.addListener('click', function() {
+                    directionsService.route({
+                        origin: mylocationdata,
+
+                        destination: {
+                            lat: latit,
+                            lng: longit
+                        },
+                        travelMode: 'DRIVING'
+                    }, function(response, status) {
+                        if (status === 'OK') {
+                            directionsDisplay.setDirections(response);
+                        } else {
+                            window.alert('Directions request failed due to ' + status);
+                        }
+                    });
+
+                });
+                map.fitBounds(bounds);
+            }
+        }
+
+
+        function geoError() {
+            alert("Geocoder failed.");
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+    </script>
+
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA-ys&callback=getLocation"></script>
