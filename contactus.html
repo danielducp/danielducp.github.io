@@ -55,60 +55,135 @@
     </div>
   
     <div class="main">
-      <button onclick="getLocation()">Try It</button>
-      <p id="demo"></p>
-        <h3>My Google Maps Demo</h3>
-        <!--The div element for the map -->
-        <div style="width: 100%">
-          <iframe
-          width="600"
-          height="450"
-          frameborder="0" style="border:0"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA
-            &q=University+Centre+Peterborough,Peterborough+UK" allowfullscreen>
-        </iframe>
-        </div><br />
+      <div id="theMap" style="width:60%;height:800px;"></div>
+
+
         <div id="map"></div>
      
         <script>
-          var x = document.getElementById("demo");
-          
+          function detectBrowser() {
+              var useragent = navigator.userAgent;
+              var mapdiv = document.getElementById("map");
+  
+              if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1) {
+                  mapdiv.style.width = '100%';
+                  mapdiv.style.height = '100%';
+              } else {
+                  mapdiv.style.width = '600px';
+                  mapdiv.style.height = '800px';
+              }
+          }
+  
+          var mylocationdata;
+          var latit;
+          var longit;
+  
+          function geoSuccess(position) {
+              var latitude = position.coords.latitude;
+              var longitude = position.coords.longitude;
+              var directionsService = new google.maps.DirectionsService;
+              var directionsDisplay = new google.maps.DirectionsRenderer;
+              mylocationdata = {
+                  lat: latitude,
+                  lng: longitude
+              };
+              var mapProp = {
+                  zoom: 9,
+                  mapTypeId: 'roadmap',
+  
+              };
+              var map = new google.maps.Map(document.getElementById("theMap"), mapProp);
+  
+              var directionsService = new google.maps.DirectionsService;
+              var directionsDisplay = new google.maps.DirectionsRenderer;
+  
+              directionsDisplay.setMap(map);
+  
+              var bounds = new google.maps.LatLngBounds();
+        
+   
+              var marker = new google.maps.Marker({
+                  position: mylocationdata,
+                  map: map,
+                  title: 'Where I currently am'
+              });
+              var markers = [
+                  ['University Centre Peteborough', 52.5865547, -0.232581],
+                 
+                  ['My Current Location', latitude, longitude]
+              ];
+  
+              var infoWindowContent = [
+                  ['<div class="info_content">' +
+                      '<h3>University Centre Peteborough</h3>' +
+                      '<p>University Centre Peterborough, Park Crescent Campus, Peterborough, Cambridgeshire, PE1 4DZ</p>' +
+                      '</div>'
+                  ],
+             
+              ];
+  
+              var infoWindow = new google.maps.InfoWindow(),
+                  marker, i;
+  
+              for (i = 0; i < markers.length; i++) {
+                  var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+                  bounds.extend(position);
+                  marker = new google.maps.Marker({
+                      position: position,
+                      map: map,
+                      title: markers[i][0]
+                  });
+  
+                  // Allow each marker to have an info window
+                  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                      return function() {
+                          infoWindow.setContent(infoWindowContent[i][0]);
+                          infoWindow.open(map, marker);
+  
+                          latit = marker.getPosition().lat();
+                          longit = marker.getPosition().lng();
+                 
+                      }
+                  })(marker, i));
+  
+                  marker.addListener('click', function() {
+                      directionsService.route({
+                          origin: mylocationdata,
+  
+                          destination: {
+                              lat: latit,
+                              lng: longit
+                          },
+                          travelMode: 'DRIVING'
+                      }, function(response, status) {
+                          if (status === 'OK') {
+                              directionsDisplay.setDirections(response);
+                          } else {
+                              window.alert('Directions request failed due to ' + status);
+                          }
+                      });
+  
+                  });
+                  map.fitBounds(bounds);
+              }
+          }
+  
+  
+          function geoError() {
+              alert("Geocoder failed.");
+          }
+  
           function getLocation() {
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(showPosition);
-            } else { 
-              x.innerHTML = "Geolocation is not supported by this browser.";
-            }
+              if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+              } else {
+                  alert("Geolocation is not supported by this browser.");
+              }
           }
-          
-          function showPosition(position) {
-            x.innerHTML = "Latitude: " + position.coords.latitude + 
-            "<br>Longitude: " + position.coords.longitude;
-          }
-          </script>
-     <script>
-          
-    // Initialize and add the map
-    function initMap() {
-      // The location of Uluru
-      var uluru = {lat: -25.344, lng: 131.036};
-      var x = document.getElementById("demo");
-
-      // The map, centered at Uluru
-      var map = new google.maps.Map(
-          document.getElementById('map'), {zoom: 4, center: uluru});
-      // The marker, positioned at Uluru
-      var marker = new google.maps.Marker({position: uluru, map: map});
-    }
-        </script>
-        <!--Load the API from the specified URL
-        * The async attribute allows the browser to render the page while the API loads
-        * The key parameter will contain your own API key (which is not needed for this tutorial)
-        * The callback parameter executes the initMap() function
-        -->
-        <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA-ys&callback=getLocation">
-        </script>
+      </script>
+  
+      <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA-ys&callback=getLocation"></script>
+  
   
     </div>
   
