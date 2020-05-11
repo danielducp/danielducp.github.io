@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="websitestyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
+<div class="topnav" id="myTopnav">
+  
+        <a id="logolink" href="homepage.html">
+          <img id="logo"  src="logo.png"
+          >
+       </a>
+    <a href="#home" class="active">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+
+  
+  <div style="overflow:auto">
+    <div class="left">
+        <br>
+        <p>
+           Please fill in the form below to contact us 
+            <form action="/action_page.php" class="form-container">
+
+                <table style="margin-right:10px;">
+                  <tr>
+                    <td align="right">Name:</td>
+                    <td align="left"><input type="text" placeholder="Enter Name" name="name" required/> </td>
+                  </tr>
+                  <tr>
+                    <td align="right">Email:</td>
+                    <td align="left"><input type="email" placeholder="Enter Email" name="email" required/></td>
+                  </tr>
+                  <tr>
+                    <td align="right">Message:</td>
+                    <td align="left"><input type="text" placeholder="Enter your message" name="message" required /></td>
+                  </tr>
+                </table>
+              </form>
+              <br>
+              Or call us: Visit Peterborough
+              <br> 
+              <a href="tel:01733 214466">01733 214466</a>
+            
+    </div>
+  
+    <div class="main">
+      <button onclick="getLocation()">Try It</button>
+        <h3>My Google Maps Demo</h3>
+        <!--The div element for the map -->
+        <div style="width: 100%">
+          <iframe
+          width="600"
+          height="450"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA
+            &q=University+Centre+Peterborough,Peterborough+UK" allowfullscreen>
+        </iframe>
+        </div><br />
+        <div id="map"></div>
+     
+        <script>
+          var x = document.getElementById("demo");
+          
+          function getLocation() {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+              x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+          }
+          
+          function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude + 
+            "<br>Longitude: " + position.coords.longitude;
+          }
+          </script>
+     <script>
+          
+    // Initialize and add the map
+    function initMap() {
+      // The location of Uluru
+      var uluru = {lat: -25.344, lng: 131.036};
+      // The map, centered at Uluru
+      var map = new google.maps.Map(
+          document.getElementById('map'), {zoom: 4, center: uluru});
+      // The marker, positioned at Uluru
+      var marker = new google.maps.Marker({position: uluru, map: map});
+    }
+        </script>
+        <!--Load the API from the specified URL
+        * The async attribute allows the browser to render the page while the API loads
+        * The key parameter will contain your own API key (which is not needed for this tutorial)
+        * The callback parameter executes the initMap() function
+        -->
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap">
+        </script>
+  
+    </div>
+  
+    <div class="right">
+        <div id = "eventinfo" >
+
+            <div w-type="event-discovery" w-tmapikey="eXCCC9X1aXPUfjmWpbIbyj4X7jpIwH1H" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="" w-theme="simple" w-colorscheme="light" w-width="300" w-height="600" w-size="25" w-border="0" w-borderradius="4" w-postalcode="" w-radius="25" w-city="Peterborough" w-period="year" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-sorting="groupByName" w-id="id_lqttl" w-countrycode="GB" w-source="" w-branding="Ticketmaster" w-latlong=""></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>Follow us on Facebook, Twitter and Instagram</p>
+    <a href="https://www.facebook.com/Visit-Peterborough-107213310962419/"> <img class="footerimage" src="images/fblogo.png"/>
+    <a href="https://twitter.com/VisitPeterboro1"> <img class="footerimage" src="images/twitterlogo.png" />
+    <a href="https://www.instagram.com/visitpeterborough20/"> <img class="footerimage" src="images/instagramlogo.png"/>
+  
+  
+  </div> 
+  <script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
+
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'progressbar',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    </script>
+  </body>
+  </html>
+  

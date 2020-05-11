@@ -53,7 +53,7 @@
 
   .topnav {
     overflow: hidden;
-    background-color: red;
+    background-color: #474747;
   }
   
   .topnav a {
@@ -124,7 +124,7 @@ background-color: #F8F8F8;
 }
 
 .footer {
-  background-color: red;
+  background-color: #474747;
   color: #ffffff;
   text-align: center;
   font-size: 12px;
