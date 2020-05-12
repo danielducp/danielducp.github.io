@@ -12,7 +12,7 @@
         <script>
             let map;
             let marker;
-            let Information;
+            let infoWindow;
             let Directions;
             let Traffic;
             let DisplayDirections;
@@ -58,9 +58,9 @@
   }
 }
                     google.maps.event.addListener( marker, 'click', function(e){
-                        Information.getContent().style.display='block';
-                        Information.setPosition( this.getPosition() );
-                        Information.open( map );
+                        infoWindow.getContent().style.display='block';
+                        infoWindow.setPosition( this.getPosition() );
+                        infoWindow.open( map );
                     });
                     google.maps.event.addListener( marker, 'dragend', calculateroute );
                 };
@@ -106,9 +106,9 @@
                     addmarker( location, 'start' );
                     addmarker( destination, 'finish' );
 
-                    /* display the textual directions in an Information which opens on marker click */
-                    Information = new google.maps.Information({ maxWidth:450, disableAutoPan:false });
-                    Information.setContent( document.getElementById('info') );
+                    /* display the textual directions in an infowindow which opens on marker click */
+                    infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
+                    infoWindow.setContent( document.getElementById('info') );
 
 
                     /* create the objects required for the directions calculations */
@@ -127,7 +127,7 @@
                     /* go get the directions... */
                     DisplayDirections.setMap( map );
                     Traffic.setMap( map );
-                    DisplayDirections.setPanel( Information.getContent() );
+                    DisplayDirections.setPanel( infoWindow.getContent() );
                     Directions.route( Object.assign( oReq, advReqOptions ), callback );
                 };
 
