@@ -36,6 +36,7 @@
 
 
             function initMap(){
+                
                 /* utility to add a new marker and assign listeners to it */
                 const addmarker=function( pos, type, colour ){
                     marker=new google.maps.Marker({
@@ -90,7 +91,7 @@
                     let options= {
                         zoom: 16,
                         center:location,
-                        mapTypeId: google.maps.MapTypeId.terrain
+                        mapTypeId: 'satellite'
                     };
                     let routeoptions={
                         suppressMarkers:true,
