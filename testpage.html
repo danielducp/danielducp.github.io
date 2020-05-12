@@ -40,7 +40,7 @@
                 lng: longitude
             };
             var mapProp = {
-                //            center: new google.maps.LatLng(latitude, longitude), // puts your current location at the centre of the map,
+                           center: new google.maps.LatLng(latitude, longitude), // puts your current location at the centre of the map,
                 zoom: 15,
                 mapTypeId: 'roadmap',
 
@@ -54,9 +54,9 @@
             directionsDisplay.setMap(map);
 
             var bounds = new google.maps.LatLngBounds();
-            //        var mapOptions = {
-            //            mapTypeId: 'roadmap'
-            //        };
+                    var mapOptions = {
+                        mapTypeId: 'roadmap'
+                   };
 
             // Multiple Markers
             var marker = new google.maps.Marker({
