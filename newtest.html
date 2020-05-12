@@ -17,7 +17,7 @@
             let Traffic;
             let DisplayDirections;
             let oReq;
-            let Destination= { lat: 52.5865547, lng: -0.232581};
+            let destination= { lat: 52.5865547, lng: -0.232581};
             var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
 
             const modes={
@@ -69,7 +69,7 @@
                 const calculateroute=function(e){
                     oReq={
                         origin:this.type=='start' ? e.latLng : oReq.origin,
-                        Destination:this.type=='finish' ? e.latLng : oReq.Destination,
+                        destination:this.type=='finish' ? e.latLng : oReq.destination,
                         travelMode:modes.car
                     };
                     Directions.route( Object.assign( oReq, advReqOptions ), callback );
@@ -104,7 +104,7 @@
 
                     /* add draggable markers to the start and end of pre-defined route */
                     addmarker( location, 'start' );
-                    addmarker( Destination, 'finish' );
+                    addmarker( destination, 'finish' );
 
                     /* display the textual directions in an infowindow which opens on marker click */
                     infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
@@ -120,7 +120,7 @@
                     /* construct the initial request */
                     oReq={
                         origin:location,
-                        Destination:Destination,
+                        destination:destination,
                         travelMode:modes.car
                     };
 
