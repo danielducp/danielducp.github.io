@@ -42,7 +42,9 @@ function initMap() {
   var mk1 = new google.maps.Marker({position: dakota, map: map});
   var mk2 = new google.maps.Marker({position: frick, map: map});
   var line = new google.maps.Polyline({path: [dakota, frick], map: map});
+  var distance = haversine_distance(mk1, mk2);
   document.getElementById('msg').innerHTML = "Distance between markers: " + distance.toFixed(2) + " mi.";
+
 }
     </script>
     <!--Load the API from the specified URL -- remember to replace YOUR_API_KEY-->
