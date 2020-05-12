@@ -38,31 +38,26 @@
             function initMap(){
                 /* utility to add a new marker and assign listeners to it */
                 const addmarker=function( pos, type, colour ){
-                  
-                  
-  marker = new google.maps.Marker({
-    
-    icon: image,
+                    marker=new google.maps.Marker({
+                        icon: image,
+                        animation: google.maps.Animation.DROP,
 
-map: map,
-    draggable: true,
-    animation: google.maps.Animation.DROP,
-    position: {lat: 59.327, lng: 18.067}
-  });
-  marker.addListener('click', toggleBounce);
-}
-
-function toggleBounce() {
+                        type:type,
+                        draggable:true,
+                        position:pos,
+                        map:map
+                        
+                    });
+                   
+                    marker.addListener('click', toggleBounce);
+                    function toggleBounce() {
   if (marker.getAnimation() !== null) {
     marker.setAnimation(null);
   } else {
     marker.setAnimation(google.maps.Animation.BOUNCE);
   }
-
-                  
-
-
-                   google.maps.event.addListener( marker, 'click', function(e){
+}
+                    google.maps.event.addListener( marker, 'click', function(e){
                         infoWindow.getContent().style.display='block';
                         infoWindow.setPosition( this.getPosition() );
                         infoWindow.open( map );
