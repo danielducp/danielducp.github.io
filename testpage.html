@@ -14,26 +14,7 @@
     <div id="map"></div>
     <div id="msg"></div>
 
-    <button onclick="getLocation()">Try It</button>
-
-<p id="demo"></p>
-
-<script>
-var x = document.getElementById("demo");
-
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
-}
-</script>
+    
     <script>
 // Initialize and add the map
 var map;
@@ -57,7 +38,7 @@ function initMap() {
   map = new google.maps.Map(
       document.getElementById('map'), options);
   // Locations of landmarks
-  const ucp = {lat: position.coords.latitude, lng: position.coords.longitude};
+  const ucp = {lat: 52.5865547, lng: -0.232581};
   const frick = {lat: 52.7880967, lng: -0.1489333};
   // The markers for The Dakota and The Frick Collection
 
