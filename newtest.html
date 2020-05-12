@@ -68,8 +68,8 @@
                 /* callback function when markers are dragged and the route is re-calculated */
                 const calculateroute=function(e){
                     Request={
-                        origin:this.type=='beginning' ? e.latLng : Request.origin,
-                        destination:this.type=='end' ? e.latLng : Request.destination,
+                        origin:this.type=='start' ? e.latLng : Request.origin,
+                        destination:this.type=='finish' ? e.latLng : Request.destination,
                         travelMode:modes.car
                     };
                     Directions.route( Object.assign( Request, advReqOptions ), callback );
@@ -102,9 +102,9 @@
                     /* create the map object */
                     map = new google.maps.Map( document.getElementById('map'), options );
 
-                    /* add draggable markers to the beginning and end of pre-defined route */
-                    addmarker( location, 'beginning' );
-                    addmarker( destination, 'end' );
+                    /* add draggable markers to the start and end of pre-defined route */
+                    addmarker( location, 'start' );
+                    addmarker( destination, 'finish' );
 
                     /* display the textual directions in an Information which opens on marker click */
                     Information = new google.maps.Information({ maxWidth:450, disableAutoPan:false });
@@ -132,7 +132,10 @@
                 };
 
 
-                
+                const evtGeoFailure=function(e){ console.info( 'you broke the internets: %s', e ) };
+                const config={ maximumAge:60000, timeout:5000, enableHighAccuracy:true };
+
+                if( navigator.geolocation ) navigator.geolocation.getCurrentPosition( evtGeoSuccess, evtGeoFailure, config );
             }
         </script>
         <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap' async defer></script>
