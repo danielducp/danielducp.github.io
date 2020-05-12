@@ -18,6 +18,7 @@
             let oDisp;
             let oReq;
             let destination= { lat: 52.5865547, lng: -0.232581};
+            var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
             const modes={
                 walk:'WALKING',
@@ -39,12 +40,20 @@
                 /* utility to add a new marker and assign listeners to it */
                 const addmarker=function( pos, type, colour ){
                     marker=new google.maps.Marker({
-                        icon:'http:// maps.google.com/mapfiles/kml/pal2'+colour+'-icon3.png',
+                        icon: image,
+
                         type:type,
                         draggable:true,
                         position:pos,
                         map:map
                     });
+                    function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
                     google.maps.event.addListener( marker, 'click', function(e){
                         infoWindow.getContent().style.display='block';
                         infoWindow.setPosition( this.getPosition() );
