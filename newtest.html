@@ -12,11 +12,11 @@
         <script>
             let map;
             let marker;
-            let infoWindow;
-            let oDir;
-            let oTraf;
-            let oDisp;
-            let oReq;
+            let Information;
+            let Directions;
+            let Traffic;
+            let DisplayDirections;
+            let Request;
             let destination= { lat: 52.5865547, lng: -0.232581};
             var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
 
@@ -58,26 +58,26 @@
   }
 }
                     google.maps.event.addListener( marker, 'click', function(e){
-                        infoWindow.getContent().style.display='block';
-                        infoWindow.setPosition( this.getPosition() );
-                        infoWindow.open( map );
+                        Information.getContent().style.display='block';
+                        Information.setPosition( this.getPosition() );
+                        Information.open( map );
                     });
                     google.maps.event.addListener( marker, 'dragend', calculateroute );
                 };
 
                 /* callback function when markers are dragged and the route is re-calculated */
                 const calculateroute=function(e){
-                    oReq={
-                        origin:this.type=='start' ? e.latLng : oReq.origin,
-                        destination:this.type=='finish' ? e.latLng : oReq.destination,
+                    Request={
+                        origin:this.type=='beginning' ? e.latLng : Request.origin,
+                        destination:this.type=='end' ? e.latLng : Request.destination,
                         travelMode:modes.car
                     };
-                    oDir.route( Object.assign( oReq, advReqOptions ), callback );
+                    Directions.route( Object.assign( Request, advReqOptions ), callback );
                 };
 
                 /* process the route response */
                 const callback=function(r,s){
-                    if( s === 'OK' ) oDisp.setDirections( r );
+                    if( s === 'OK' ) DisplayDirections.setDirections( r );
                     else evtGeoFailure( s );
                 }
 
@@ -89,53 +89,50 @@
                         lng: parseFloat( p.coords.longitude )
                     };
                     let options= {
-                        zoom: 16,
+                        zoom: 10,
                         center:location,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
                     let routeoptions={
                         suppressMarkers:true,
-                        draggable:true,
+                        draggable:false,
                         map:map
                     };
 
                     /* create the map object */
                     map = new google.maps.Map( document.getElementById('map'), options );
 
-                    /* add draggable markers to the start and end of pre-defined route */
-                    addmarker( location, 'start' );
-                    addmarker( destination, 'finish' );
+                    /* add draggable markers to the beginning and end of pre-defined route */
+                    addmarker( location, 'beginning' );
+                    addmarker( destination, 'end' );
 
-                    /* display the textual directions in an infowindow which opens on marker click */
-                    infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
-                    infoWindow.setContent( document.getElementById('info') );
+                    /* display the textual directions in an Information which opens on marker click */
+                    Information = new google.maps.Information({ maxWidth:450, disableAutoPan:false });
+                    Information.setContent( document.getElementById('info') );
 
 
                     /* create the objects required for the directions calculations */
-                    oDir=new google.maps.DirectionsService();
-                    oDisp=new google.maps.DirectionsRenderer( routeoptions );
-                    oTraf=new google.maps.TrafficLayer();
+                    Directions=new google.maps.DirectionsService();
+                    DisplayDirections=new google.maps.DirectionsRenderer( routeoptions );
+                    Traffic=new google.maps.TrafficLayer();
 
 
                     /* construct the initial request */
-                    oReq={
+                    Request={
                         origin:location,
                         destination:destination,
                         travelMode:modes.car
                     };
 
                     /* go get the directions... */
-                    oDisp.setMap( map );
-                    oTraf.setMap( map );
-                    oDisp.setPanel( infoWindow.getContent() );
-                    oDir.route( Object.assign( oReq, advReqOptions ), callback );
+                    DisplayDirections.setMap( map );
+                    Traffic.setMap( map );
+                    DisplayDirections.setPanel( Information.getContent() );
+                    Directions.route( Object.assign( Request, advReqOptions ), callback );
                 };
 
 
-                const evtGeoFailure=function(e){ console.info( 'you broke the internets: %s', e ) };
-                const config={ maximumAge:60000, timeout:5000, enableHighAccuracy:true };
-
-                if( navigator.geolocation ) navigator.geolocation.getCurrentPosition( evtGeoSuccess, evtGeoFailure, config );
+                
             }
         </script>
         <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap' async defer></script>
