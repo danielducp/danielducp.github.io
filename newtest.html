@@ -3,12 +3,7 @@
     <head>
 
         <meta charset='utf-8' />
-        <style>
-            body,
-            html { height:100%;margin:0;padding:0;box-sizing:border-box; }
-            #map { width:50%;height:50%; margin:auto;float:none; }
-            #info{ display:none;padding:0.25rem;margin:1rem;background:white;font-size:0.75rem!important; }
-        </style>
+
         <script>
             var map;
             var marker;
@@ -68,8 +63,8 @@
                 /* callback function when markers are dragged and the route is re-calculated */
                 const calculateroute=function(e){
                     Request={
-                        origin:this.type=='start' ? e.latLng : Request.origin,
-                        destination:this.type=='finish' ? e.latLng : Request.destination,
+                        origin:this.type=='beginning' ? e.latLng : Request.origin,
+                        destination:this.type=='end' ? e.latLng : Request.destination,
                         travelMode:modes.car
                     };
                     Directions.route( Object.assign( Request, advReqOptions ), callback );
@@ -102,9 +97,9 @@
                     /* create the map object */
                     map = new google.maps.Map( document.getElementById('map'), options );
 
-                    /* add draggable markers to the start and end of pre-defined route */
-                    addmarker( location, 'start' );
-                    addmarker( destination, 'finish' );
+                    /* add draggable markers to the beginning and end of pre-defined route */
+                    addmarker( location, 'beginning' );
+                    addmarker( destination, 'end' );
 
                     /* display the textual directions in an infowindow which opens on marker click */
                     infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
