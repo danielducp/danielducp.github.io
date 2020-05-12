@@ -6,7 +6,7 @@
         <style>
             body,
             html { height:100%;margin:0;padding:0;box-sizing:border-box; }
-            #map { width:100%;height:100vh; margin:auto;float:none; }
+            #map { width:50%;height:50%; margin:auto;float:none; }
             #info{ display:none;padding:0.25rem;margin:1rem;background:white;font-size:0.75rem!important; }
         </style>
         <script>
@@ -39,7 +39,7 @@
                 /* utility to add a new marker and assign listeners to it */
                 const addmarker=function( pos, type, colour ){
                     marker=new google.maps.Marker({
-                        icon:'//maps.google.com/mapfiles/ms/icons/'+colour+'-pushpin.png',
+                        icon:'http:// maps.google.com/mapfiles/kml/pal2'+colour+'-icon3.png',
                         type:type,
                         draggable:true,
                         position:pos,
@@ -91,8 +91,8 @@
                     map = new google.maps.Map( document.getElementById('map'), options );
 
                     /* add draggable markers to the start and end of pre-defined route */
-                    addmarker( location, 'start', 'grn' );
-                    addmarker( destination, 'finish', 'red' );
+                    addmarker( location, 'start', 'black' );
+                    addmarker( destination, 'finish', 'blue' );
 
                     /* display the textual directions in an infowindow which opens on marker click */
                     infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
