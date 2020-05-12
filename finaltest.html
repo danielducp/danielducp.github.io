@@ -25,7 +25,6 @@
   </div>
 
   
-
     <div class="left">
         <br>
         <p>
@@ -53,182 +52,160 @@
               <a href="tel:01733 214466">01733 214466</a>
             
     </div>
-  
-    <div class="main">  </div>
-      <div id='info'> </div>
+  <br>
+    <div class="main">
 
+      <script>
+        var map;
+        var marker;
+        var infoWindow;
+        var Directions;
+        var Traffic;
+        var DisplayDirections;
+        var Request;
+        var destination= { lat: 52.5865547, lng: -0.232581};
+        var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
 
-  
-   
-        <script>
-            var map;
-            var marker;
-            var infoWindow;
-            var Directions;
-            var Traffic;
-            var DisplayDirections;
-            var Request;
-            var destination= { lat: 52.5865547, lng: -0.232581};
-            var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-
-            const modes={
-        
-                car:'DRIVING'
-          
-            };
-            const advReqOptions={
-                provideRouteAlternatives:true,
-                optimizeWaypoints:true,
-                avoidFerries:true,
-                avoidHighways:false,
-                avoidTolls:false
-            };
+        const modes={
+    
+            car:'DRIVING'
+      
+        };
+        const advReqOptions={
+            provideRouteAlternatives:true,
+            optimizeWaypoints:true,
+            avoidFerries:true,
+            avoidHighways:false,
+            avoidTolls:false
+        };
 
 
 
-            function initMap(){
-                
-                /* utility to add a new marker and assign listeners to it */
-                const addmarker=function( pos, type, colour ){
-                    marker=new google.maps.Marker({
-                        icon: image,
-                        animation: google.maps.Animation.DROP,
-                        type:type,
-                        draggable:false,
-                        position:pos,
-                        map:map
-                        
-                    });
-                   
-                    marker.addListener('click', toggleBounce);
-                    function toggleBounce() {
-  if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
+        function initMap(){
+            
+            /* utility to add a new marker and assign listeners to it */
+            const addmarker=function( pos, type, colour ){
+                marker=new google.maps.Marker({
+                    icon: image,
+                    animation: google.maps.Animation.DROP,
+                    type:type,
+                    draggable:false,
+                    position:pos,
+                    map:map
+                    
+                });
+               
+                marker.addListener('click', toggleBounce);
+                function toggleBounce() {
+if (marker.getAnimation() !== null) {
+marker.setAnimation(null);
+} else {
+marker.setAnimation(google.maps.Animation.BOUNCE);
 }
-                    google.maps.event.addListener( marker, 'click', function(e){
-                        infoWindow.getContent().style.display='block';
-                        infoWindow.setPosition( this.getPosition() );
-                        infoWindow.open( map );
-                    });
-                    google.maps.event.addListener( marker, 'dragend', calculateroute );
+}
+                google.maps.event.addListener( marker, 'click', function(e){
+             
+                });
+                google.maps.event.addListener( marker, 'dragend', calculateroute );
+            };
+
+            /* callback function when markers are dragged and the route is re-calculated */
+            const calculateroute=function(e){
+                Request={
+                    origin:this.type=='start' ? e.latLng : Request.origin,
+                    destination:this.type=='finish' ? e.latLng : Request.destination,
+                    travelMode:modes.car
                 };
+                Directions.route( Object.assign( Request, advReqOptions ), callback );
+            };
 
-                /* callback function when markers are dragged and the route is re-calculated */
-                const calculateroute=function(e){
-                    Request={
-                        origin:this.type=='start' ? e.latLng : Request.origin,
-                        destination:this.type=='finish' ? e.latLng : Request.destination,
-                        travelMode:modes.car
-                    };
-                    Directions.route( Object.assign( Request, advReqOptions ), callback );
-                };
-
-                /* process the route response */
-                const callback=function(r,s){
-                    if( s === 'OK' ) DisplayDirections.setDirections( r );
-                    else evtGeoFailure( s );
-                }
-
-                /* Main callback invoked when the user's location has been identified */
-                const evtGeoSuccess=function(p){
-                    /* create the map */
-                    var location={
-                        lat: parseFloat( p.coords.latitude ),
-                        lng: parseFloat( p.coords.longitude )
-                    };
-                    var options= {
-                        zoom: 10,
-                        center:location,
-                        mapTypeId: 'terrain'
-                    };
-                    var routeoptions={
-                        suppressMarkers:true,
-                        draggable:false,
-                        map:map
-                    };
-
-                    /* create the map object */
-                    map = new google.maps.Map( document.getElementById('main'), options );
-
-                    /* add draggable markers to the start and end of pre-defined route */
-                    addmarker( location, 'start' );
-                    addmarker( destination, 'finish' );
-
-                    /* display the textual directions in an infowindow which opens on marker click */
-                    infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
-                    infoWindow.setContent( document.getElementById('info') );
-
-
-                    /* create the objects required for the directions calculations */
-                    Directions=new google.maps.DirectionsService();
-                    DisplayDirections=new google.maps.DirectionsRenderer( routeoptions );
-                    Traffic=new google.maps.TrafficLayer();
-
-
-                    /* construct the initial request */
-                    Request={
-                        origin:location,
-                        destination:destination,
-                        travelMode:modes.car
-                    };
-
-                    /* go get the directions... */
-                    DisplayDirections.setMap( map );
-                    Traffic.setMap( map );
-                    DisplayDirections.setPanel( infoWindow.getContent() );
-                    Directions.route( Object.assign( Request, advReqOptions ), callback );
-                };
-
-
-                const evtGeoFailure=function(e){ console.info( 'you broke the internets: %s', e ) };
-                const config={ maximumAge:60000, timeout:5000, enableHighAccuracy:true };
-
-                if( navigator.geolocation ) navigator.geolocation.getCurrentPosition( evtGeoSuccess, evtGeoFailure, config );
+            /* process the route response */
+            const callback=function(r,s){
+                if( s === 'OK' ) DisplayDirections.setDirections( r );
+                else evtGeoFailure( s );
             }
-        </script>
-        <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap' async defer></script>
-    </head>
+
+            /* Main callback invoked when the user's location has been identified */
+            const evtGeoSuccess=function(p){
+                /* create the map */
+                var location={
+                    lat: parseFloat( p.coords.latitude ),
+                    lng: parseFloat( p.coords.longitude )
+                };
+                var options= {
+                    zoom: 10,
+                    center:location,
+                    mapTypeId: 'terrain'
+                };
+                var routeoptions={
+                    suppressMarkers:true,
+                    draggable:false,
+                    map:map
+                };
+
+                /* create the map object */
+                map = new google.maps.Map( document.getElementById('main'), options );
+
+                /* add draggable markers to the start and end of pre-defined route */
+                addmarker( location, 'start' );
+                addmarker( destination, 'finish' );
+
+                /* construct the initial request */
+                Request={
+                    origin:location,
+                    destination:destination,
+                    travelMode:modes.car
+                };
+
+                /* go get the directions... */
+                DisplayDirections.setMap( map );
+                Traffic.setMap( map );
+                Directions.route( Object.assign( Request, advReqOptions ), callback );
+            };
+
+
+            const evtGeoFailure=function(e){ console.info( 'you broke the internets: %s', e ) };
+            const config={ maximumAge:60000, timeout:5000, enableHighAccuracy:true };
+
+            if( navigator.geolocation ) navigator.geolocation.getCurrentPosition( evtGeoSuccess, evtGeoFailure, config );
+        }
+    </script>
+    <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap' async defer></script>
+</head>
+<div id='info'></div>
+ 
 
   
+    </div>
+  
+    <div class="right">
+        <div id = "eventinfo" >
 
-</div></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="right">
-    <div id = "eventinfo" >
-Helloggggg
+      </div>
+    </div>
   </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="footer">
-<p>Follow us on Facebook, Twitter and Instagram</p>
-<a href="https://www.facebook.com/Visit-Peterborough-107213310962419/"> <img class="footerimage" src="images/fblogo.png"/>
-<a href="https://twitter.com/VisitPeterboro1"> <img class="footerimage" src="images/twitterlogo.png" />
-<a href="https://www.instagram.com/visitpeterborough20/"> <img class="footerimage" src="images/instagramlogo.png"/>
+  
+  <div class="footer">
+    <p>Follow us on Facebook, Twitter and Instagram</p>
+    <a href="https://www.facebook.com/Visit-Peterborough-107213310962419/"> <img class="footerimage" src="images/fblogo.png"/>
+    <a href="https://twitter.com/VisitPeterboro1"> <img class="footerimage" src="images/twitterlogo.png" />
+    <a href="https://www.instagram.com/visitpeterborough20/"> <img class="footerimage" src="images/instagramlogo.png"/>
+  
+  
+  </div> 
+  <script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
 
 
-</div> 
-<script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
-
-
-<script>
-function myFunction() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-</script>
-</body>
-</html>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    </script>
+  </body>
+  </html>
+  

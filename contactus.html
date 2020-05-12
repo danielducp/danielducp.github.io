@@ -25,6 +25,7 @@
   </div>
 
   
+  <div style="overflow:auto">
     <div class="left">
         <br>
         <p>
@@ -52,135 +53,145 @@
               <a href="tel:01733 214466">01733 214466</a>
             
     </div>
-  <br>
+  
     <div class="main">
-
-      <script>
-        var map;
-        var marker;
-        var infoWindow;
-        var Directions;
-        var Traffic;
-        var DisplayDirections;
-        var Request;
-        var destination= { lat: 52.5865547, lng: -0.232581};
-        var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-
-        const modes={
-    
-            car:'DRIVING'
-      
-        };
-        const advReqOptions={
-            provideRouteAlternatives:true,
-            optimizeWaypoints:true,
-            avoidFerries:true,
-            avoidHighways:false,
-            avoidTolls:false
-        };
+      <div id="theMap" style="width:60%;height:800px;"></div>
 
 
-
-        function initMap(){
-            
-            /* utility to add a new marker and assign listeners to it */
-            const addmarker=function( pos, type, colour ){
-                marker=new google.maps.Marker({
-                    icon: image,
-                    animation: google.maps.Animation.DROP,
-                    type:type,
-                    draggable:false,
-                    position:pos,
-                    map:map
-                    
-                });
-               
-                marker.addListener('click', toggleBounce);
-                function toggleBounce() {
-if (marker.getAnimation() !== null) {
-marker.setAnimation(null);
-} else {
-marker.setAnimation(google.maps.Animation.BOUNCE);
-}
-}
-                google.maps.event.addListener( marker, 'click', function(e){
+        <div id="map"></div>
+     
+        <script>
+          function detectBrowser() {
+              var useragent = navigator.userAgent;
+              var mapdiv = document.getElementById("map");
+  
+              if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1) {
+                  mapdiv.style.width = '100%';
+                  mapdiv.style.height = '100%';
+              } else {
+                  mapdiv.style.width = '600px';
+                  mapdiv.style.height = '800px';
+              }
+          }
+  
+          var mylocationdata;
+          var latit;
+          var longit;
+  
+          function geoSuccess(position) {
+              var latitude = position.coords.latitude;
+              var longitude = position.coords.longitude;
+              var directionsService = new google.maps.DirectionsService;
+              var directionsDisplay = new google.maps.DirectionsRenderer;
+              mylocationdata = {
+                  lat: latitude,
+                  lng: longitude
+              };
+              var mapProp = {
+                  zoom: 9,
+                  mapTypeId: 'roadmap',
+  
+              };
+              var map = new google.maps.Map(document.getElementById("theMap"), mapProp);
+  
+              var directionsService = new google.maps.DirectionsService;
+              var directionsDisplay = new google.maps.DirectionsRenderer;
+  
+              directionsDisplay.setMap(map);
+  
+              var bounds = new google.maps.LatLngBounds();
+        
+   
+              var marker = new google.maps.Marker({
+                  position: mylocationdata,
+                  map: map,
+                  title: 'Where I currently am'
+              });
+              var markers = [
+                  ['University Centre Peteborough', 52.5865547, -0.232581],
+                 
+                  ['My Current Location', latitude, longitude]
+              ];
+  
+              var infoWindowContent = [
+                  ['<div class="info_content">' +
+                      '<h3>University Centre Peteborough</h3>' +
+                      '<p>University Centre Peterborough, Park Crescent Campus, Peterborough, Cambridgeshire, PE1 4DZ</p>' +
+                      '</div>'
+                  ],
              
-                });
-                google.maps.event.addListener( marker, 'dragend', calculateroute );
-            };
-
-            /* callback function when markers are dragged and the route is re-calculated */
-            const calculateroute=function(e){
-                Request={
-                    origin:this.type=='start' ? e.latLng : Request.origin,
-                    destination:this.type=='finish' ? e.latLng : Request.destination,
-                    travelMode:modes.car
-                };
-                Directions.route( Object.assign( Request, advReqOptions ), callback );
-            };
-
-            /* process the route response */
-            const callback=function(r,s){
-                if( s === 'OK' ) DisplayDirections.setDirections( r );
-                else evtGeoFailure( s );
-            }
-
-            /* Main callback invoked when the user's location has been identified */
-            const evtGeoSuccess=function(p){
-                /* create the map */
-                var location={
-                    lat: parseFloat( p.coords.latitude ),
-                    lng: parseFloat( p.coords.longitude )
-                };
-                var options= {
-                    zoom: 10,
-                    center:location,
-                    mapTypeId: 'terrain'
-                };
-                var routeoptions={
-                    suppressMarkers:true,
-                    draggable:false,
-                    map:map
-                };
-
-                /* create the map object */
-                map = new google.maps.Map( document.getElementById('main'), options );
-
-                /* add draggable markers to the start and end of pre-defined route */
-                addmarker( location, 'start' );
-                addmarker( destination, 'finish' );
-
-                /* construct the initial request */
-                Request={
-                    origin:location,
-                    destination:destination,
-                    travelMode:modes.car
-                };
-
-                /* go get the directions... */
-                DisplayDirections.setMap( map );
-                Traffic.setMap( map );
-                Directions.route( Object.assign( Request, advReqOptions ), callback );
-            };
-
-
-            const evtGeoFailure=function(e){ console.info( 'you broke the internets: %s', e ) };
-            const config={ maximumAge:60000, timeout:5000, enableHighAccuracy:true };
-
-            if( navigator.geolocation ) navigator.geolocation.getCurrentPosition( evtGeoSuccess, evtGeoFailure, config );
-        }
-    </script>
-    <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap' async defer></script>
-</head>
-<div id='info'></div>
- 
-
+              ];
+  
+              var infoWindow = new google.maps.InfoWindow(),
+                  marker, i;
+  
+              for (i = 0; i < markers.length; i++) {
+                  var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+                  bounds.extend(position);
+                  marker = new google.maps.Marker({
+                      position: position,
+                      map: map,
+                      title: markers[i][0]
+                  });
+  
+                  // Allow each marker to have an info window
+                  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                      return function() {
+                          infoWindow.setContent(infoWindowContent[i][0]);
+                          infoWindow.open(map, marker);
+  
+                          latit = marker.getPosition().lat();
+                          longit = marker.getPosition().lng();
+                 
+                      }
+                  })(marker, i));
+  
+                  marker.addListener('click', function() {
+                      directionsService.route({
+                          origin: mylocationdata,
+  
+                          destination: {
+                              lat: latit,
+                              lng: longit
+                          },
+                          travelMode: 'DRIVING'
+                      }, function(response, status) {
+                          if (status === 'OK') {
+                              directionsDisplay.setDirections(response);
+                          } else {
+                              window.alert('Directions request failed due to ' + status);
+                          }
+                      });
+  
+                  });
+                  map.fitBounds(bounds);
+              }
+          }
+  
+  
+          function geoError() {
+              alert("Geocoder failed.");
+          }
+  
+          function getLocation() {
+              if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+              } else {
+                  alert("Geolocation is not supported by this browser.");
+              }
+          }
+      </script>
+  
+      <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=getLocation"></script>
+  
+  
   
     </div>
   
     <div class="right">
         <div id = "eventinfo" >
 
+            <div w-type="event-discovery" w-tmapikey="eXCCC9X1aXPUfjmWpbIbyj4X7jpIwH1H" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="" w-theme="simple" w-colorscheme="light" w-width="300" w-height="600" w-size="25" w-border="0" w-borderradius="4" w-postalcode="" w-radius="25" w-city="Peterborough" w-period="year" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-sorting="groupByName" w-id="id_lqttl" w-countrycode="GB" w-source="" w-branding="Ticketmaster" w-latlong=""></div>
       </div>
     </div>
   </div>
@@ -195,7 +206,18 @@ marker.setAnimation(google.maps.Animation.BOUNCE);
   </div> 
   <script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
 
-
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'progressbar',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
   <script>
     function myFunction() {
       var x = document.getElementById("myTopnav");
@@ -208,4 +230,3 @@ marker.setAnimation(google.maps.Animation.BOUNCE);
     </script>
   </body>
   </html>
-  
