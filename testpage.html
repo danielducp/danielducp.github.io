@@ -41,7 +41,6 @@ function initMap() {
   // The markers for The Dakota and The Frick Collection
   var mk1 = new google.maps.Marker({position: dakota, map: map});
   var mk2 = new google.maps.Marker({position: frick, map: map});
-  var line = new google.maps.Polyline({path: [dakota, frick], map: map});
   var distance = haversine_distance(mk1, mk2);
 
 
