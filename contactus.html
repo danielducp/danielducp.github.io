@@ -76,13 +76,18 @@
   
           var mylocationdata;
           var latit;
-          var longit;
+          var longit;var infoWindow;
   
           function geoSuccess(position) {
               var latitude = position.coords.latitude;
               var longitude = position.coords.longitude;
               var directionsService = new google.maps.DirectionsService;
               var directionsDisplay = new google.maps.DirectionsRenderer;
+              var routeoptions={
+                        suppressMarkers:true,
+                        draggable:false,
+                        map:map
+                    };
               mylocationdata = {
                   lat: latitude,
                   lng: longitude
@@ -95,7 +100,7 @@
               var map = new google.maps.Map(document.getElementById("theMap"), mapProp);
   
               var directionsService = new google.maps.DirectionsService;
-              var directionsDisplay = new google.maps.DirectionsRenderer;
+              var directionsDisplay = new google.maps.DirectionsRenderer (routeoptions);
   
               directionsDisplay.setMap(map);
   
@@ -121,7 +126,9 @@
                   ],
              
               ];
-  
+              infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
+                    infoWindow.setContent( document.getElementById('info') );
+
               var infoWindow = new google.maps.InfoWindow(),
                   marker, i;
   
@@ -154,7 +161,7 @@
                               lat: latit,
                               lng: longit
                           },
-                          travelMode: 'DRIVING'
+                          travelMode:modes.car
                       }, function(response, status) {
                           if (status === 'OK') {
                               directionsDisplay.setDirections(response);
