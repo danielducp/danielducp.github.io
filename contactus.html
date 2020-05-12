@@ -147,7 +147,7 @@ marker.setAnimation(google.maps.Animation.BOUNCE);
                 };
 
                 /* create the map object */
-                map = new google.maps.Map( document.getElementById('map'), options );
+                map = new google.maps.Map( document.getElementById('main'), options );
 
                 /* add draggable markers to the start and end of pre-defined route */
                 addmarker( location, 'start' );
@@ -187,10 +187,9 @@ marker.setAnimation(google.maps.Animation.BOUNCE);
     </script>
     <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap' async defer></script>
 </head>
-<div id='map'></div>
+<div id='info'></div>
  
 
-</html>
   
     </div>
   
