@@ -54,13 +54,8 @@
             
     </div>
   
-    <div class="row">
-      <div class="column">  <div id='info'></div>
-      <div class="column">       <div id='map'></div>
-      <div class="column"></div>
-      <div class="column"></div>
-    </div>
-
+    <div class="main">  
+      <div id='info'>
 
 
   
@@ -156,7 +151,7 @@
                     };
 
                     /* create the map object */
-                    map = new google.maps.Map( document.getElementById('map'), options );
+                    map = new google.maps.Map( document.getElementById('main'), options );
 
                     /* add draggable markers to the start and end of pre-defined route */
                     addmarker( location, 'start' );
