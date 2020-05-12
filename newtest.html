@@ -21,10 +21,9 @@
             var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
 
             const modes={
-                walk:'WALKING',
-                bike:'BICYCLING',
-                car:'DRIVING',
-                pub:'TRANSIT'
+        
+                car:'DRIVING'
+          
             };
             const advReqOptions={
                 provideRouteAlternatives:true,
@@ -41,11 +40,13 @@
                 const addmarker=function( pos, type, colour ){
                     marker=new google.maps.Marker({
                         icon: image,
+                        animation: google.maps.Animation.DROP,
 
                         type:type,
                         draggable:true,
                         position:pos,
                         map:map
+                        
                     });
                     function toggleBounce() {
   if (marker.getAnimation() !== null) {
