@@ -158,10 +158,10 @@
 
                 marker.addListener('click', function() {
                     directionsService.route({
-                        // origin: document.getElementById('start').value,
+                         origin: document.getElementById('start').value,
                         origin: myLatLng,
 
-                        // destination: marker.getPosition(),
+                         destination: marker.getPosition(),
                         destination: {
                             lat: latit,
                             lng: longit
@@ -181,21 +181,21 @@
             }
         }
 
-        // function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        //     directionsService.route({
-        //         // origin: document.getElementById('start').value,
-        //         origin: myLatLng,
-        //         destination: marker.getPosition(),
-        //         travelMode: 'DRIVING'
-        //     }, function(response, status) {
-        //         if (status === 'OK') {
-        //             console.log('all good');
-        //             directionsDisplay.setDirections(response);
-        //         } else {
-        //             window.alert('Directions request failed due to ' + status);
-        //         }
-        //     });
-        // }
+         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            directionsService.route({
+                  origin: document.getElementById('start').value,
+                origin: myLatLng,
+            destination: marker.getPosition(),
+                 travelMode: 'DRIVING'
+            }, function(response, status) {
+               if (status === 'OK') {
+                    console.log('all good');
+                    directionsDisplay.setDirections(response);
+                 } else {
+                     window.alert('Directions request failed due to ' + status);
+                 }
+             });
+         }
 
         function geoError() {
             alert("Geocoder failed.");
