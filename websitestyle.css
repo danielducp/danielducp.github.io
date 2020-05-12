@@ -350,3 +350,7 @@ background-color: #F8F8F8;
       text-align: left;
     }
   }
+  body,
+  html { height:100%;margin:0;padding:0;box-sizing:border-box; }
+  #map { width:50%;height:50%; margin:auto;float:none; }
+  #info{ display:none;padding:0.25rem;margin:1rem;background:white;font-size:0.75rem!important; }
