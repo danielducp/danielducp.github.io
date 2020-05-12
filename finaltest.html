@@ -131,11 +131,6 @@
                     Directions.route( Object.assign( Request, advReqOptions ), callback );
                 };
 
-
-                const evtGeoFailure=function(e){ console.info( 'you broke the internets: %s', e ) };
-                const config={ maximumAge:60000, timeout:5000, enableHighAccuracy:true };
-
-                if( navigator.geolocation ) navigator.geolocation.getCurrentPosition( evtGeoSuccess, evtGeoFailure, config );
             }
         </script>
         <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap' async defer></script>
