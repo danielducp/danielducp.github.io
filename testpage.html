@@ -89,34 +89,10 @@
 
     
     <script>
-
-var map2, infoWindow;
-      function initMap() {
-        map2 = new google.maps.Map(document.getElementById('map2'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 6
-        });
-        infoWindow = new google.maps.InfoWindow;
-      }
- if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map2);
-            map2.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map2.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map2.getCenter());
-        }
-      
+          var location={
+                        lat: parseFloat( p.coords.latitude ),
+                        lng: parseFloat( p.coords.longitude )
+                    };
 // Initialize and add the map
 var map;
   
@@ -152,7 +128,7 @@ let directionsService = new google.maps.DirectionsService();
   // Create route from existing points used for markers
   const route = {
       origin: ucp,
-      destination: frick,
+      destination: location,
       travelMode: 'DRIVING'
   }
 

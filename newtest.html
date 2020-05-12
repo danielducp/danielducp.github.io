@@ -84,16 +84,16 @@
                 /* Main callback invoked when the user's location has been identified */
                 const evtGeoSuccess=function(p){
                     /* create the map */
-                    let location={
+                    var location={
                         lat: parseFloat( p.coords.latitude ),
                         lng: parseFloat( p.coords.longitude )
                     };
-                    let options= {
+                    var options= {
                         zoom: 16,
                         center:location,
                         mapTypeId: 'satellite'
                     };
-                    let routeoptions={
+                    var routeoptions={
                         suppressMarkers:true,
                         draggable:false,
                         map:map
