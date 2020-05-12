@@ -7,7 +7,7 @@
             body,
             html { height:100%;margin:0;padding:0;box-sizing:border-box; }
             #themap { width:50%;height:50%; margin:auto;float:none; }
-            #directions{ display:none;padding:0.25rem;margin:1rem;background:white;font-size:0.75rem!important; }
+            #directionsarea{ display:none;padding:0.25rem;margin:1rem;background:white;font-size:0.75rem!important; }
         </style>
         <script>
             var map;
@@ -108,7 +108,7 @@
 
                     /* display the textual directions in an infowindow which opens on marker click */
                     infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
-                    infoWindow.setContent( document.getElementById('directions') );
+                    infoWindow.setContent( document.getElementById('directionsarea') );
 
 
                     /* create the objects required for the directions calculations */
@@ -141,7 +141,7 @@
         <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap' async defer></script>
     </head>
     <body>
-        <div id='map'></div>
-        <div id='info'></div>
+        <div id='themap'></div>
+        <div id='directionsarea'></div>
     </body>
 </html>
