@@ -36,7 +36,7 @@
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
-            const pos = {
+            var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
@@ -69,7 +69,6 @@
 </html>
 
 
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -90,11 +89,9 @@
 
     
     <script>
-      
 // Initialize and add the map
 var map;
-  // Try HTML5 geolocation.
-
+  
 function haversine_distance(mk1, mk2) {
       var R = 3958.8; // Radius of the Earth in miles
       var rlat1 = mk1.position.lat() * (Math.PI/180); // Convert degrees to radians
@@ -106,38 +103,12 @@ function haversine_distance(mk1, mk2) {
       return d;
     }
     
+      
 
 function initMap() {
   // The map, centered on Central Park
   const center = {lat: 40.774102, lng: -73.971734};
   const options = {zoom: 15, scaleControl: true, center: center};
-  if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            const pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      
-
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
   map = new google.maps.Map(
       document.getElementById('map'), options);
   // Locations of landmarks
@@ -145,10 +116,7 @@ function initMap() {
   const ucp = {lat: 52.5865547, lng: -0.232581};
   const frick = {lat: 52.7880967, lng: -0.1489333};
   // The markers for The Dakota and The Frick Collection
-  const pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
+
 
     
 let directionsService = new google.maps.DirectionsService();
@@ -157,7 +125,7 @@ let directionsService = new google.maps.DirectionsService();
   // Create route from existing points used for markers
   const route = {
       origin: ucp,
-      destination: pos,
+      destination: frick,
       travelMode: 'DRIVING'
   }
 
@@ -189,3 +157,4 @@ let directionsService = new google.maps.DirectionsService();
     </script>
   </body>
 </html>
+
