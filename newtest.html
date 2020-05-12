@@ -18,7 +18,7 @@
             let oDisp;
             let oReq;
             let destination= { lat: 52.5865547, lng: -0.232581};
-            var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+            var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
 
             const modes={
                 walk:'WALKING',
@@ -100,8 +100,8 @@
                     map = new google.maps.Map( document.getElementById('map'), options );
 
                     /* add draggable markers to the start and end of pre-defined route */
-                    addmarker( location, 'start', 'black' );
-                    addmarker( destination, 'finish', 'blue' );
+                    addmarker( location, 'start' );
+                    addmarker( destination, 'finish' );
 
                     /* display the textual directions in an infowindow which opens on marker click */
                     infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
