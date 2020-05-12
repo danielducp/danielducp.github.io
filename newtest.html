@@ -12,10 +12,10 @@
         <script>
             let map;
             let marker;
-            let infoWindow;
+            let Information;
             let Directions;
             let Traffic;
-            let oDisp;
+            let DisplayDirections;
             let oReq;
             let destination= { lat: 52.5865547, lng: -0.232581};
             var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
@@ -58,9 +58,9 @@
   }
 }
                     google.maps.event.addListener( marker, 'click', function(e){
-                        infoWindow.getContent().style.display='block';
-                        infoWindow.setPosition( this.getPosition() );
-                        infoWindow.open( map );
+                        Information.getContent().style.display='block';
+                        Information.setPosition( this.getPosition() );
+                        Information.open( map );
                     });
                     google.maps.event.addListener( marker, 'dragend', calculateroute );
                 };
@@ -77,7 +77,7 @@
 
                 /* process the route response */
                 const callback=function(r,s){
-                    if( s === 'OK' ) oDisp.setDirections( r );
+                    if( s === 'OK' ) DisplayDirections.setDirections( r );
                     else evtGeoFailure( s );
                 }
 
@@ -106,14 +106,14 @@
                     addmarker( location, 'start' );
                     addmarker( destination, 'finish' );
 
-                    /* display the textual directions in an infowindow which opens on marker click */
-                    infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
-                    infoWindow.setContent( document.getElementById('info') );
+                    /* display the textual directions in an Information which opens on marker click */
+                    Information = new google.maps.Information({ maxWidth:450, disableAutoPan:false });
+                    Information.setContent( document.getElementById('info') );
 
 
                     /* create the objects required for the directions calculations */
                     Directions=new google.maps.DirectionsService();
-                    oDisp=new google.maps.DirectionsRenderer( routeoptions );
+                    DisplayDirections=new google.maps.DirectionsRenderer( routeoptions );
                     Traffic=new google.maps.TrafficLayer();
 
 
@@ -125,9 +125,9 @@
                     };
 
                     /* go get the directions... */
-                    oDisp.setMap( map );
+                    DisplayDirections.setMap( map );
                     Traffic.setMap( map );
-                    oDisp.setPanel( infoWindow.getContent() );
+                    DisplayDirections.setPanel( Information.getContent() );
                     Directions.route( Object.assign( oReq, advReqOptions ), callback );
                 };
 
