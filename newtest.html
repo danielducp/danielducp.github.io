@@ -14,7 +14,7 @@
             let marker;
             let infoWindow;
             let Directions;
-            let oTraf;
+            let Traffic;
             let oDisp;
             let oReq;
             let destination= { lat: 52.5865547, lng: -0.232581};
@@ -114,7 +114,7 @@
                     /* create the objects required for the directions calculations */
                     Directions=new google.maps.DirectionsService();
                     oDisp=new google.maps.DirectionsRenderer( routeoptions );
-                    oTraf=new google.maps.TrafficLayer();
+                    Traffic=new google.maps.TrafficLayer();
 
 
                     /* construct the initial request */
@@ -126,7 +126,7 @@
 
                     /* go get the directions... */
                     oDisp.setMap( map );
-                    oTraf.setMap( map );
+                    Traffic.setMap( map );
                     oDisp.setPanel( infoWindow.getContent() );
                     Directions.route( Object.assign( oReq, advReqOptions ), callback );
                 };
