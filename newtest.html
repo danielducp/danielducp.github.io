@@ -10,14 +10,14 @@
             #info{ display:none;padding:0.25rem;margin:1rem;background:white;font-size:0.75rem!important; }
         </style>
         <script>
-            let map;
-            let marker;
-            let infoWindow;
-            let Directions;
-            let Traffic;
-            let DisplayDirections;
-            let Request;
-            let destination= { lat: 52.5865547, lng: -0.232581};
+            var map;
+            var marker;
+            var infoWindow;
+            var Directions;
+            var Traffic;
+            var DisplayDirections;
+            var Request;
+            var destination= { lat: 52.5865547, lng: -0.232581};
             var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
 
             const modes={
@@ -41,7 +41,6 @@
                     marker=new google.maps.Marker({
                         icon: image,
                         animation: google.maps.Animation.DROP,
-
                         type:type,
                         draggable:true,
                         position:pos,
