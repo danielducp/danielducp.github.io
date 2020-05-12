@@ -89,13 +89,13 @@
                         lng: parseFloat( p.coords.longitude )
                     };
                     let options= {
-                        zoom: 10,
+                        zoom: 16,
                         center:location,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
                     let routeoptions={
                         suppressMarkers:true,
-                        draggable:false,
+                        draggable:true,
                         map:map
                     };
 
