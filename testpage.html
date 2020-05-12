@@ -45,8 +45,8 @@ function initMap() {
   var distance = haversine_distance(mk1, mk2);
   document.getElementById('msg').innerHTML = "Distance between markers: " + distance.toFixed(2) + " mi.";
 
-}
-  
+
+    
 let directionsService = new google.maps.DirectionsService();
   let directionsRenderer = new google.maps.DirectionsRenderer();
   directionsRenderer.setMap(map); // Existing map object displays directions
@@ -75,6 +75,8 @@ let directionsService = new google.maps.DirectionsService();
       }
     });
 
+
+}
 
     </script>
     <!--Load the API from the specified URL -- remember to replace YOUR_API_KEY-->
