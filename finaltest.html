@@ -1,140 +1,137 @@
-<div id="mapContainer" onload="calcRoute()"></div>
-
-
-<!DOCTYPE html>
+<style>
+    body,
+    html { height:100%;margin:0;padding:0;box-sizing:border-box; }
+    #map { width:50%;height:50%; margin:auto;float:none; }
+    #info{ display:none;padding:0.25rem;margin:1rem;background:white;font-size:0.75rem!important; }
+</style><!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Displaying Text Directions With setPanel()</title>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-      #right-panel {
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
+    <head>
 
-      #right-panel select, #right-panel input {
-        font-size: 15px;
-      }
+        <meta charset='utf-8' />
 
-      #right-panel select {
-        width: 100%;
-      }
+        <script>
+            var map;
+            var marker;
+            var infoWindow;
+            var Directions;
+            var Traffic;
+            var DisplayDirections;
+            var Request;
+            var destination= { lat: 52.5865547, lng: -0.232581};
+            var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
 
-      #right-panel i {
-        font-size: 12px;
-      }
-      #right-panel {
-        height: 100%;
-        float: right;
-        width: 390px;
-        overflow: auto;
-      }
-      #map {
-        margin-right: 400px;
-      }
-      #floating-panel {
-        background: #fff;
-        padding: 5px;
-        font-size: 14px;
-        font-family: Arial;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
-        display: none;
-      }
-      @media print {
-        #map {
-          height: 500px;
-          margin: 0;
-        }
-        #right-panel {
-          float: none;
-          width: auto;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="floating-panel">
-      <strong>Start:</strong>
-      <select id="start">
-        <option value="surfleet, Spaldinglinkcolnshure">Spalding</option>
+            const modes={
+        
+                car:'DRIVING'
+          
+            };
+            const advReqOptions={
+                provideRouteAlternatives:true,
+                optimizeWaypoints:true,
+                avoidFerries:true,
+                avoidHighways:false,
+                avoidTolls:false
+            };
 
-      </select>
-      <br>
-      <strong>End:</strong>
-      <select id="end">
-        <option value="52.5846023,-0.5806303">UCP</option>
 
-      </select>
-    </div>
-    <div id="right-panel"></div>
-    <div id="map"></div>
-    <script>
-      function initMap() {
-        var directionsRenderer = new google.maps.DirectionsRenderer;
-        var directionsService = new google.maps.DirectionsService;
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
-          center: { lat: 52.5865547, lng: -0.232581}
-        });
-        directionsRenderer.setMap(map);
-        directionsRenderer.setPanel(document.getElementById('right-panel'));
 
-        var control = document.getElementById('floating-panel');
-        control.style.display = 'block';
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+            function initMap(){
+                
+                /* utility to add a new marker and assign listeners to it */
+                const addmarker=function( pos, type, colour ){
+                    marker=new google.maps.Marker({
+                        icon: image,
+                        animation: google.maps.Animation.DROP,
+                        type:type,
+                        draggable:false,
+                        position:pos,
+                        map:map
+                        
+                    });
+                   
+                    marker.addListener('click', toggleBounce);
+                    function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+                    google.maps.event.addListener( marker, 'click', function(e){
+                        infoWindow.getContent().style.display='block';
+                        infoWindow.setPosition( this.getPosition() );
+                        infoWindow.open( map );
+                    });
+                    google.maps.event.addListener( marker, 'dragend', calculateroute );
+                };
 
-        var onChangeHandler = function() {
-          calculateAndDisplayRoute(directionsService, directionsRenderer);
-        };
-        document.getElementById('start').addEventListener('change', onChangeHandler);
-        document.getElementById('end').addEventListener('change', onChangeHandler);
-      }
+                /* callback function when markers are dragged and the route is re-calculated */
+                const calculateroute=function(e){
+                    Request={
+                        origin:this.type=='beginning' ? e.latLng : Request.origin,
+                        destination:this.type=='end' ? e.latLng : Request.destination,
+                        travelMode:modes.car
+                    };
+                    Directions.route( Object.assign( Request, advReqOptions ), callback );
+                };
 
-      function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-        var start = document.getElementById('start').value;
-        var end = document.getElementById('end').value;
-        directionsService.route({
-          origin: start,
-          destination: end,
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsRenderer.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap">
-    </script>
-  </body>
-</html>
+                /* process the route response */
+                const callback=function(r,s){
+                    if( s === 'OK' ) DisplayDirections.setDirections( r );
+                    else evtGeoFailure( s );
+                }
+
+                /* Main callback invoked when the user's location has been identified */
+                const evtGeoSuccess=function(p){
+                    /* create the map */
+                    var location={
+                        lat: parseFloat( p.coords.latitude ),
+                        lng: parseFloat( p.coords.longitude )
+                    };
+                    var options= {
+                        zoom: 10,
+                        center:location,
+                        mapTypeId: 'terrain'
+                    };
+                    var routeoptions={
+                        suppressMarkers:true,
+                        draggable:false,
+                        map:map
+                    };
+
+                    /* create the map object */
+                    map = new google.maps.Map( document.getElementById('map'), options );
+
+                    /* add draggable markers to the beginning and end of pre-defined route */
+                    addmarker( location, 'beginning' );
+                    addmarker( destination, 'end' );
+
+                    /* display the textual directions in an infowindow which opens on marker click */
+                    infoWindow = new google.maps.InfoWindow({ maxWidth:450, disableAutoPan:false });
+                    infoWindow.setContent( document.getElementById('info') );
+
+
+                    /* create the objects required for the directions calculations */
+                    Directions=new google.maps.DirectionsService();
+                    DisplayDirections=new google.maps.DirectionsRenderer( routeoptions );
+                    Traffic=new google.maps.TrafficLayer();
+
+
+                    /* construct the initial request */
+                    Request={
+                        origin:location,
+                        destination:destination,
+                        travelMode:modes.car
+                    };
+
+                    /* go get the directions... */
+                    DisplayDirections.setMap( map );
+                    Traffic.setMap( map );
+                    DisplayDirections.setPanel( infoWindow.getContent() );
+                    Directions.route( Object.assign( Request, advReqOptions ), callback );
+                };
+
+
+            }
+        </script>
+        <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap' async defer></script>
