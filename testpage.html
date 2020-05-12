@@ -89,10 +89,7 @@
 
     
     <script>
-          var location={
-                        lat: parseFloat( p.coords.latitude ),
-                        lng: parseFloat( p.coords.longitude )
-                    };
+   
 // Initialize and add the map
 var map;
   
@@ -115,7 +112,10 @@ function initMap() {
   map = new google.maps.Map(
       document.getElementById('map'), options);
   // Locations of landmarks
-  
+  const location={
+                        lat: parseFloat( p.coords.latitude ),
+                        lng: parseFloat( p.coords.longitude )
+                    };
   const ucp = {lat: 52.5865547, lng: -0.232581};
 
   // The markers for The Dakota and The Frick Collection
