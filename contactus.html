@@ -56,7 +56,7 @@
     <script src="https://maps.google.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&sensor=false"></script>
 
     <div class="main">
-      <div id="embedMap" onLoad="">
+      <div id="map" onLoad="">
 
       <div id="msg"></div>
       <script>
@@ -86,7 +86,7 @@
               }
           }
           var DisplayDirections;
-          var map = new google.maps.Map(document.getElementById("embedMap"), myOptions);
+          var map = new google.maps.Map(document.getElementById("map"), myOptions);
       
       
           function haversine_distance(mk1, mk2) {
@@ -146,7 +146,7 @@
       </head>
       <body>
       
-          <div id="embedMap" onLoad="" style="width: 400px; height: 300px;">
+          <div id="map" onLoad="" style="width: 400px; height: 300px;">
             <div id="msg" onLoad="" style="width: 400px; height: 300px;">
       
               <!--Google map will be embedded here-->
