@@ -351,13 +351,7 @@ background-color: #F8F8F8;
       text-align: left;
     }
   }
-  #embedMap { width: 100%; height: 340px;}
+  #embedMap { width: 100%; height: 330px;}
 
-#msg { width: 400px; height: 300px;}
+#msg { width: 100%; height: 20px;}
 
-.main2 {
-  float:left;
-  width:60%;
-  padding:10px 20px;
-  height: 400px;
-}
