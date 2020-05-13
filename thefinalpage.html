@@ -59,8 +59,6 @@ function showMap(position) {
   }
 
 
-  var distance = haversine_distance(ucp, latlong);
-  document.getElementById('msg').innerHTML = "Distance between markers: " + distance.toFixed(2) + " mi.";
 
   directionsService.route(route,
   
