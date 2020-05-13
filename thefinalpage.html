@@ -1,8 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="utf-8">
-<title>Showing User's Location on Google Map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="websitestyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
+<div class="topnav" id="myTopnav">
+  
+        <a id="logolink" href="homepage.html">
+          <img id="logo"  src="logo.png"
+          >
+       </a>
+    <a href="#home" class="active">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+
+  
+  <div style="overflow:auto">
+    <div class="left">
+        <br>
+        <p>
+           Please fill in the form below to contact us 
+            <form action="/action_page.php" class="form-container">
+
+                <table style="margin-right:10px;">
+                  <tr>
+                    <td align="right">Name:</td>
+                    <td align="left"><input type="text" placeholder="Enter Name" name="name" required/> </td>
+                  </tr>
+                  <tr>
+                    <td align="right">Email:</td>
+                    <td align="left"><input type="email" placeholder="Enter Email" name="email" required/></td>
+                  </tr>
+                  <tr>
+                    <td align="right">Message:</td>
+                    <td align="left"><input type="text" placeholder="Enter your message" name="message" required /></td>
+                  </tr>
+                </table>
+              </form>
+              <br>
+              Or call us: Visit Peterborough
+              <br> 
+              <a href="tel:01733 214466">01733 214466</a>
+            
+    </div>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&sensor=false"></script>
 
 <div id="msg"></div>
