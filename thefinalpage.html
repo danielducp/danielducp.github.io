@@ -49,7 +49,7 @@ function showError(error) {
 </script>
 </head>
 <body>
-    <button type="button">Show My Position on Google Map</button>
+
     <div id="embedMap" onLoad="" style="width: 400px; height: 300px;">
         <!--Google map will be embedded here-->
     </div>
@@ -72,7 +72,38 @@ function showError(error) {
     <div id="map"></div>
     <div id="msg"></div>
     <script>
-// Initialize and add the map
+
+function showPosition() {
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showMap, showError);
+    } else {
+        alert("Sorry, your browser does not support HTML5 geolocation.");
+    }
+    
+}
+showPosition()
+// Define callback function for successful attempt
+function showMap(position) {
+    // Get location data
+    lat = position.coords.latitude;
+    long = position.coords.longitude;
+    var latlong = new google.maps.LatLng(lat, long);
+    
+    var myOptions = {
+        center: latlong,
+        zoom: 16,
+        mapTypeControl: true,
+        navigationControlOptions: {
+            style:google.maps.NavigationControlStyle.SMALL
+        }
+    }
+    
+    var map = new google.maps.Map(document.getElementById("embedMap"), myOptions);
+    var marker = new google.maps.Marker({ position:latlong, map:map, title:"You are here!" });
+}
+
+
+
 var map;
   
 function haversine_distance(mk1, mk2) {
@@ -98,15 +129,7 @@ function initMap() {
   const frick = {lat: 52.7880967, lng: -0.1489333};
   // The markers for The Dakota and The Frick Collection
 
-  const coords = {lat: "", lon: ""};
-  function showPosition(position)
-{
-   coords.lat = position.coords.latitude;
-   coords.lon = position.coords.longitude;
 
-   x.innerHTML="Latitude: " + coords.lat + 
-   "<br />Longitude: " + coords.lon;  
-}
     
 let directionsService = new google.maps.DirectionsService();
   let directionsRenderer = new google.maps.DirectionsRenderer();
@@ -114,7 +137,7 @@ let directionsService = new google.maps.DirectionsService();
   // Create route from existing points used for markers
   const route = {
       origin: ucp,
-      destination: coords,
+      destination: latlong,
       travelMode: 'DRIVING'
   }
 
