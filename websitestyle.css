@@ -356,6 +356,7 @@ background-color: #F8F8F8;
   }
 #embedMap {    float:left;
   width:100%;
+  height:100%;
   padding:10px 20px;}
 
 #msg { width: 400px; height: 300px;}
