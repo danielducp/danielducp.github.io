@@ -19,7 +19,7 @@ function showMap(position) {
     // Get location data
     lat = position.coords.latitude;
     long = position.coords.longitude;
-    var latlong = new google.maps.LatLng(lat, long);
+    const latlong = new google.maps.LatLng(lat, long);
     const ucp = {lat: 52.5865547, lng: -0.232581};
 
     var myOptions = {
