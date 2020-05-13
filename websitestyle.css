@@ -354,3 +354,10 @@ background-color: #F8F8F8;
   #embedMap { width: 100%; height: 340px;}
 
 #msg { width: 400px; height: 300px;}
+
+.main2 {
+  float:left;
+  width:60%;
+  padding:10px 20px;
+  height: 400px;
+}
