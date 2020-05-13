@@ -11,8 +11,9 @@ function showPosition() {
     } else {
         alert("Sorry, your browser does not support HTML5 geolocation.");
     }
+    
 }
- 
+showPosition()
 // Define callback function for successful attempt
 function showMap(position) {
     // Get location data
@@ -48,8 +49,8 @@ function showError(error) {
 </script>
 </head>
 <body>
-    <button type="button" onclick="showPosition();">Show My Position on Google Map</button>
-    <div id="embedMap" style="width: 400px; height: 300px;">
+    <button type="button">Show My Position on Google Map</button>
+    <div id="embedMap" onLoad="" style="width: 400px; height: 300px;">
         <!--Google map will be embedded here-->
     </div>
 </body>
