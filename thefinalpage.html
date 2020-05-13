@@ -100,11 +100,11 @@ function showMap(position) {
     
     var map = new google.maps.Map(document.getElementById("embedMap"), myOptions);
     var marker = new google.maps.Marker({ position:latlong, map:map, title:"You are here!" });
-}
 
 
 
-var map;
+
+
   
 function haversine_distance(mk1, mk2) {
       var R = 3958.8; // Radius of the Earth in miles
@@ -159,10 +159,11 @@ let directionsService = new google.maps.DirectionsService();
       }
     });
 
-
+}
 }
 
-    </script>
+    </script>    <div id="embedMap" onLoad="" style="width: 400px; height: 300px;">
+
     <!--Load the API from the specified URL -- remember to replace YOUR_API_KEY-->
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap">
