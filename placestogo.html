@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="websitestyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
+<div class="topnav" id="myTopnav">
+  
+        <a id="logolink" href="homepage.html">
+          <img id="logo"  src="logo.png"
+          >
+       </a>
+    <a href="homepage.html" class="active">Home</a>
+    <a href="eventspage.html">Events to see</a>
+    <a href="#about">Places to go</a>
+    <a href="#about">Things to do</a>
+
+    <a href="contactus.html">Contact</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+
+  
+  <div style="overflow:auto">
+    <div class="left">
+        <p>
+           The city of Peterborough has a number of places to go for all types of visitors. <br>
+           If you prefer historic things, 
+              </p>
+    </div>
+  
+    <div class="main">
+
+        <div class="row">
+            <div class="column">
+              <div class="card">
+                <h3>Peterborough Cathedral</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+          
+            <div class="column">
+              <div class="card">
+                <h3>Card 2</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+            
+            <div class="column">
+              <div class="card">
+                <h3>Card 3</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+            
+            <div class="column">
+              <div class="card">
+                <h3>Card 4</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+          </div>
+<br>
+          <div class="row">
+            <div class="column">
+              <div class="card">
+                <h3>Card 1</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+          
+            <div class="column">
+              <div class="card">
+                <h3>Card 2</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+            
+            <div class="column">
+              <div class="card">
+                <h3>Card 3</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+            
+            <div class="column">
+              <div class="card">
+                <h3>Card 4</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div class="row">
+            <div class="column">
+              <div class="card">
+                <h3>Card 1</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+          
+            <div class="column">
+              <div class="card">
+                <h3>Card 2</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+            
+            <div class="column">
+              <div class="card">
+                <h3>Card 3</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+            
+            <div class="column">
+              <div class="card">
+                <h3>Card 4</h3>
+                <p>Some text</p>
+                <p>Some text</p>
+              </div>
+            </div>
+          </div>
+    </div>
+  
+    <div class="right">
+        <div class ="weather">
+
+            <h1>Weather</h1>
+      
+        
+    
+              <h1   id="location"></h1>
+          <h1   id="description"></h1>
+          <h1 id="temp"></h1>
+    
+    
+        </div>
+     
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>Follow us on Facebook, Twitter and Instagram</p>
+    <a href="https://www.facebook.com/Visit-Peterborough-107213310962419/"> <img class="footerimage" src="images/fblogo.png"/>
+    <a href="https://twitter.com/VisitPeterboro1"> <img class="footerimage" src="images/twitterlogo.png" />
+    <a href="https://www.instagram.com/visitpeterborough20/"> <img class="footerimage" src="images/instagramlogo.png"/>
+  
+  
+  </div> 
+   <script lang="text/javascript">
+    const key = '9412a6dd4a7d4295985d183212bcb671';
+    if(key=='') document.getElementById('temp').innerHTML = ('Remember to add your api key!');
+    
+    function weatherBallon( cityID ) {
+        fetch('https://api.openweathermap.org/data/2.5/weather?id=' + cityID+ '&appid=' + key)  
+        .then(function(resp) { return resp.json() }) // Convert data to json
+        .then(function(data) {
+            drawWeather(data);
+        })
+        .catch(function() {
+            // catch any errors
+        });
+    }
+    function drawWeather( d ) {
+      var celcius = Math.round(parseFloat(d.main.temp)-273.15);
+        var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8)+32);
+      var description = d.weather[0].description; 
+        
+        document.getElementById('description').innerHTML = description;
+        document.getElementById('temp').innerHTML = celcius + '&deg;';
+        document.getElementById('location').innerHTML = d.name;
+      
+      if( description.indexOf('rain') > 0 ) {
+          document.h1.className = 'rainy';
+      } else if( description.indexOf('cloud') > 0 ) {
+          document.h1.className = 'cloudy';
+      } else if( description.indexOf('sunny') > 0 ) {
+          document.h1.className = 'sunny';
+      } else {
+          document.h1.className = 'clear';
+      }
+    }
+    window.onload = function() {
+        weatherBallon( 2640354 );
+    }
+    
+      </script>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'progressbar',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    </script>
+  </body>
+  </html>
+  
