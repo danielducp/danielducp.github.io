@@ -72,7 +72,15 @@ function initMap() {
   const frick = {lat: 52.7880967, lng: -0.1489333};
   // The markers for The Dakota and The Frick Collection
 
+  var coords = {lat: "", lon: ""};
+  function showPosition(position)
+{
+   coords.lat = position.coords.latitude;
+   coords.lon = position.coords.longitude;
 
+   x.innerHTML="Latitude: " + coords.lat + 
+   "<br />Longitude: " + coords.lon;  
+}
     
 let directionsService = new google.maps.DirectionsService();
   let directionsRenderer = new google.maps.DirectionsRenderer();
@@ -80,7 +88,7 @@ let directionsService = new google.maps.DirectionsService();
   // Create route from existing points used for markers
   const route = {
       origin: ucp,
-      destination: frick,
+      destination: coords,
       travelMode: 'DRIVING'
   }
 
