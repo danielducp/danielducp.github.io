@@ -350,6 +350,8 @@ background-color: #F8F8F8;
       text-align: left;
     }
   }
-#embedMap { width: 400px; height: 300px;}
+#embedMap {    float:left;
+  width:60%;
+  padding:10px 20px;}
 
 #msg { width: 400px; height: 300px;}
