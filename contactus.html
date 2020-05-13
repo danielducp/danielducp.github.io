@@ -57,9 +57,11 @@
 
     <div class="main">
       <div id="embedMap" onLoad="" style="width: 400px; height: 300px;">
+        <h1>TEST</h1>
+        <div id="msg" onLoad="" style="width: 400px; height: 300px;">
 
-      <div id="msg"></div>
-      <script>
+        <div id="msg"></div>
+        <script>
       function showPosition() {
           if(navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(showMap, showError);
