@@ -351,6 +351,6 @@ background-color: #F8F8F8;
       text-align: left;
     }
   }
-  #embedMap { width: 100%; }
+  #embedMap { width: 100%; height: 340px;}
 
 #msg { width: 400px; height: 300px;}
