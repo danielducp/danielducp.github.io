@@ -57,33 +57,10 @@ function showMap(position) {
   }
 
 
-   /* create the objects required for the directions calculations */
-   Directions=new google.maps.DirectionsService();
-                    DisplayDirections=new google.maps.DirectionsRenderer( routeoptions );
-                    Traffic=new google.maps.TrafficLayer();
 
-
-                    /* construct the initial request */
-                    Request={
-                        origin:location,
-                        destination:destination,
-                        travelMode:modes.car
-                    };
-
-                    /* go get the directions... */
-                    DisplayDirections.setMap( map );
-                    Traffic.setMap( map );
-                    DisplayDirections.setPanel( infoWindow.getContent() );
-                    Directions.route( Object.assign( Request, advReqOptions ), callback );
-                };
-
-
-                const evtGeoFailure=function(e){ console.info( 'you broke the internets: %s', e ) };
-                const config={ maximumAge:60000, timeout:5000, enableHighAccuracy:true };
-
-                if( navigator.geolocation ) navigator.geolocation.getCurrentPosition( evtGeoSuccess, evtGeoFailure, config );
 
   directionsService.route(route,
+  
     function(response, status) { // anonymous function to capture directions
       if (status !== 'OK') {
         window.alert('Directions request failed due to ' + status);
@@ -100,7 +77,7 @@ function showMap(position) {
         }
       }
     });
-
+}
  
 // Define callback function for failed attempt
 function showError(error) {
@@ -119,6 +96,8 @@ function showError(error) {
 <body>
 
     <div id="embedMap" onLoad="" style="width: 400px; height: 300px;">
+      <div id="msg" onLoad="" style="width: 400px; height: 300px;">
+
         <!--Google map will be embedded here-->
     </div>
 </body>
