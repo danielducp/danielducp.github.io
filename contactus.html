@@ -105,8 +105,8 @@
         directionsRenderer.setMap(map); // Existing map object displays directions
         // Create route from existing points used for markers
         const route = {
-            origin: ucp,
-            destination: latlong,
+            origin: latlong,
+            destination: ucp,
             unitSystem: google.maps.UnitSystem.IMPERIAL, 
             travelMode: 'DRIVING'
         }
