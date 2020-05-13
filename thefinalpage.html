@@ -7,8 +7,8 @@
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-        height: 100%;
+      #map2 {
+        height: 50%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -25,9 +25,9 @@
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
-      var map, infoWindow;
+      var map2, infoWindow;
       function initMap() {
-        map = new google.maps.Map(document.getElementById('map2'), {
+        map2 = new google.maps.Map(document.getElementById('map2'), {
           center: {lat: -34.397, lng: 150.644},
           zoom: 6
         });
@@ -43,14 +43,14 @@
 
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
+            infoWindow.open(map2);
+            map2.setCenter(pos);
           }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
+            handleLocationError(true, infoWindow, map2.getCenter());
           });
         } else {
           // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
+          handleLocationError(false, infoWindow, map2.getCenter());
         }
       }
 
@@ -59,11 +59,11 @@
         infoWindow.setContent(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
+        infoWindow.open(map2);
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdCoAFhgpKnITWRb5RnO0bV3dMQgx7FeA&callback=initMap">
     </script>
   </body>
 </html>
