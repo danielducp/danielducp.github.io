@@ -32,7 +32,6 @@ function showMap(position) {
     }
     
     var map = new google.maps.Map(document.getElementById("embedMap"), myOptions);
-    var marker = new google.maps.Marker({ position:latlong, map:map, title:"You are here!" });
 
 
     function haversine_distance(mk1, mk2) {
