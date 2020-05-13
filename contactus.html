@@ -83,7 +83,7 @@ function showMap(position) {
         }
     }
     var DisplayDirections;
-    var map = new google.maps.Map(document.getElementById("map"), myOptions);
+    var map = new google.maps.Map(document.getElementById("embedMap"), myOptions);
 
 
     function haversine_distance(mk1, mk2) {
@@ -143,7 +143,7 @@ function showError(error) {
 </head>
 <body>
 
-    <div id="map" onLoad="" style="width: 400px; height: 300px;">
+    <div id="embedMap" onLoad="" style="width: 400px; height: 300px;">
       <div id="msg" onLoad="" style="width: 400px; height: 300px;">
 
         <!--Google map will be embedded here-->
