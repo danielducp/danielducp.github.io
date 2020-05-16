@@ -1,6 +1,9 @@
 * {
     box-sizing: border-box;
+    
   }
+
+  body{ background-color: #f0f0f0 ;}
   p {
     font-family: "Times New Roman", Times, serif;
   }
@@ -9,6 +12,34 @@
     width: 90px;
    
   }
+.inputtext{
+  width: 10vw; font-size: 1vw;
+}
+  
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  font-size: 1vw;
+
+}
+
+
+a.custom-card,
+a.custom-card:hover {
+  color: inherit;
+  text-decoration:none;
+  
+}
+
+.slideshowimages{
+  width: 100%;
+  height: 250px;
+}
+
+
   #logo{
     margin-left: -15px;  
     margin-top: -13px;
@@ -221,6 +252,14 @@ background-color: #F8F8F8;
 {
   font-size: 1.25vw;
 }
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  font-size: 0.8vw;
+
+}
   }
   @media only screen and (max-width:1200px) {
     .left, .leftspare{      width:30%;
@@ -271,6 +310,8 @@ background-color: #F8F8F8;
 {
   font-size: 1.5vw;
 }
+
+
   }
 
   @media only screen and (max-width:1100px) {
@@ -320,6 +361,15 @@ background-color: #F8F8F8;
     {
       font-size: 1.5vw;
     }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      padding: 16px;
+      text-align: center;
+      background-color: #f1f1f1;
+      font-size: 0.7vw;
+    
+    }
   }
 
   @media only screen and (max-width:800px) {
@@ -365,6 +415,16 @@ background-color: #F8F8F8;
     .righttext
     {
       font-size: 1.5vw;
+    }
+
+    
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      padding: 16px;
+      text-align: left;
+      background-color: #f1f1f1;
+      font-size: 0.5vw;
+    
     }
   }
 
@@ -428,6 +488,18 @@ background-color: #F8F8F8;
       width: 100%;
       content:url("images/OfficialSite2.jpg");
     }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      padding: 16px;
+      text-align: center;
+      background-color: #f1f1f1;
+      font-size: 4vw;
+    
+    }
+    .inputtext{
+      width: 50vw; font-size: 4vw;
+    }
   }
 
 
@@ -456,7 +528,7 @@ background-color: #F8F8F8;
   }
   #embedMap { width: 100%; height: 330px;}
 
-#msg { width: 100%; height: 20px;}
+#msg { width: 90%; height: 20px;}
 
 
 * {
@@ -489,24 +561,10 @@ background-color: #F8F8F8;
     display: block;
     margin-bottom: 20px;
   }
-}
 
-/* Style the counter cards */
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  text-align: center;
-  background-color: #f1f1f1;
+  .headingtext {
+  
+    font-size: 2vw;
+  
+  }
 }
-
-a.custom-card,
-a.custom-card:hover {
-  color: inherit;
-  text-decoration:none;
-}
-
-.slideshowimages{
-  width: 100%;
-  height: 250px;
-}
-
