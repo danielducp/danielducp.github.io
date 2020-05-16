@@ -1,7 +1,9 @@
 * {
     box-sizing: border-box;
   }
-
+  p {
+    font-family: "Times New Roman", Times, serif;
+  }
   #logolink{
     height:47px;
     width: 90px;
