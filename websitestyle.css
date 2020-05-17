@@ -578,19 +578,17 @@ background-color: #F8F8F8;
 h5 {
   text-align: center;
   padding: 1.5rem 2.5rem;
-  background-image: linear-gradient(120deg, red 0%, yellow 100%);
   margin: 0 0 0 0;
   font-size: 1.5rem;
-  color: white;
+  color: black;
 }
 
 h6 {
   text-align: center;
   padding: 1.5rem 2.5rem;
-  background-image: linear-gradient(120deg, red 0%, yellow 100%);
   margin: 0 0 2rem 0;
   font-size: 1rem;
-  color: white;
+  color: black;
 }
 
 
@@ -620,44 +618,3 @@ p{
 }
   
   
-.card:nth-child(2n) h1 {
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-}
-
-
-.card:nth-child(4n) h1 {
-  background-image: linear-gradient(120deg, #ff9a9e 0%, #fecfef 100%);
-}
-
-
-.card:nth-child(5n) h1 {
-  background-image: linear-gradient(120deg, #ffc3a0 0%, #ffafbd 100%);
-}
-
-.card:nth-child(2n) h2 {
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-}
-
-
-.card:nth-child(4n) h2 {
-  background-image: linear-gradient(120deg, #ff9a9e 0%, #fecfef 100%);
-}
-
-
-.card:nth-child(5n) h2 {
-  background-image: linear-gradient(120deg, #ffc3a0 0%, #ffafbd 100%);
-}
-
-.card:nth-child(2n) bothheadings {
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-}
-
-
-.card:nth-child(4n) bothheadings {
-  background-image: linear-gradient(120deg, #ff9a9e 0%, #fecfef 100%);
-}
-
-
-.card:nth-child(5n) bothheadings {
-  background-image: linear-gradient(120deg, #ffc3a0 0%, #ffafbd 100%);
-}
