@@ -3,8 +3,13 @@
 <script>
 
  $(document).ready(function() {
-    data= {"quotesArray":[{"personName": "Albert Einstein", "quote": "Look deep into nature, and then you will understand everything better."},{ "personName": "Stephen Hawking", "quote": "Look deep into nature, and then you will understand everything better."},{"personName": "Confucius","quote": "Life is really simple, but we insist on making it complicated."}],"quotesArray2":[{"personName": "Albert Einstein", "quote": "Look deep into nature, and then you will understand everything better."},{ "personName": "Stephen Hawking", "quote": "Look deep into nature, and then you will understand everything better."},{"personName": "Confucius","quote": "Life is really simple, but we insist on making it complicated."}]}
-     var html = " ";
+
+//Open a new connection, using the GET request on the URL endpoint 
+request.open('GET', 'https://developers.zomato.com/api/v2.1/search?apikey=e2d8e360811be83dfa09e9a026e11dc7&&entity_id=322&entity_type=city', true);
+request.onload = function() {
+    var data = JSON.parse(this.response);
+
+    var html = " ";
      
        data.quotesArray.forEach(function(val) {
         var keys = Object.keys(val);
@@ -19,5 +24,5 @@
 
        $(".realquote").html(html);
    
-   });          
+   }});          
 </script>
