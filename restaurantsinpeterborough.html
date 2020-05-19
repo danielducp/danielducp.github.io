@@ -7,7 +7,10 @@
 //Open a new connection, using the GET request on the URL endpoint 
 request.open('GET', 'https://developers.zomato.com/api/v2.1/search?apikey=e2d8e360811be83dfa09e9a026e11dc7&&entity_id=322&entity_type=city', true);
 request.onload = function() {
-    var data = JSON.parse(this.response);
+    
+    data= {"quotesArray":[JSON.parse(this.response)]}
+
+   
 
     var html = " ";
      
