@@ -1,0 +1,23 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<div class="realquote">HI</div>
+<script>
+
+ $(document).ready(function() {
+    data= {"quotesArray":[{"personName": "Albert Einstein", "quote": "Look deep into nature, and then you will understand everything better."},{ "personName": "Stephen Hawking", "quote": "Look deep into nature, and then you will understand everything better."},{"personName": "Confucius","quote": "Life is really simple, but we insist on making it complicated."}],"quotesArray2":[{"personName": "Albert Einstein", "quote": "Look deep into nature, and then you will understand everything better."},{ "personName": "Stephen Hawking", "quote": "Look deep into nature, and then you will understand everything better."},{"personName": "Confucius","quote": "Life is really simple, but we insist on making it complicated."}]}
+     var html = " ";
+     
+       data.quotesArray.forEach(function(val) {
+        var keys = Object.keys(val);
+          html += "<div class = 'text-output'>";
+            keys.forEach(function(key){ 
+                html += val[key];
+
+            });
+               html += "</div>"
+         });
+
+
+       $(".realquote").html(html);
+   
+   });          
+</script>
