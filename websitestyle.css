@@ -187,7 +187,7 @@ background-color: #F8F8F8;
 }
 
 .headings{
-  text-align: left;
+  text-align: center;
   font-size: 2vw;
 }
 
@@ -617,4 +617,13 @@ p{
   }
 }
   
+.newanchor:link {
+  color:black;
+  text-decoration:none;
+  }
   
+  .newanchor:hover{
+  color:black;
+  text-decoration: underline;
+
+  }

@@ -19,9 +19,10 @@
 <a href="homepage.html" >Home</a>
 <a href="eventspage.html">Events to see</a>
 <a href="placestogo.html">Places to go</a>
-<a href="#about">Things to do</a>
-
+<a href="crimesinpeterborough.html">Crimes</a>
 <a href="contactus.html"  class="active">Contact</a>
+
+
 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
 <i class="fa fa-bars"></i>
 </a>
@@ -34,7 +35,7 @@
         <br>
         <p>
            Please fill in the form below to contact us 
-            <form action="/action_page.php" class="form-container">
+            <form action="contactus.html" class="form-container">
 
                 <table style="margin-right:10px;">
                   <tr>
@@ -50,6 +51,8 @@
                     <td align="left"><input type="text"   class="inputtext" placeholder="Enter your message" name="message" required /></td>
                   </tr>
                 </table>
+                <input type="submit" onclick="return clicked();" value="Submit">
+
               </form>
       
             
@@ -154,15 +157,20 @@
     
 
     <div class="right">
+     <b> Go Peterborough       <br>
+      Help Centre:</b>
       <br>
-      Call us:
+      Queens Gardens, Peterborough PE1 2UW, UK
+      <br>      <br>
+<b>
+      Call us:</b>
       <br> 
-      <a href="tel:01733 214466">01733 214466</a>
+      <a class="newanchor" href="tel:01733 214466">01733 214466</a>
       <br> <br> <br>
       <br>
-      Email Us: 
+    <b>  Email Us: </b>
       <br> 
-     visitpborough@gmail.com
+      <a class="newanchor" href="mailto:gopeterborough@gmail.com">gopeterborough@gmail.com</a>
     </div>
   </div>
   
@@ -185,6 +193,12 @@
         x.className = "topnav";
       }
     }
+    </script>
+
+    <script>
+      function clicked() {
+    return confirm('Thank you for contacting us');
+}
     </script>
   </body>
   </html>
