@@ -15,9 +15,11 @@
   font-size: 1vw;
 
 }
-.footertext{
+
+.footertext {
   padding-bottom: 10px;
 }
+
 body {
   background-color: #f0f0f0;
   font-family: 'Roboto', sans-serif;
@@ -98,9 +100,10 @@ a.custom-card:hover {
   font-size: 1.3vw;
 }
 
-.weather{
+.weather {
   font-size: 1vw;
 }
+
 .left a {
   background-color: #e5e5e5;
   padding: 8px;
@@ -232,7 +235,7 @@ a.custom-card:hover {
 }
 
 .leftimage {
-  
+
   content: url("images/OfficialSite.jpg");
   width: 100%;
 }
@@ -588,20 +591,22 @@ a.custom-card:hover {
     display: inline;
     align-items: center;
   }
-  .weather{
+
+  .weather {
     font-size: 3vw;
   }
+
   .newanchor:link {
     color: black;
     text-decoration: none;
     font-size: 3vw;
   }
-  
+
   .newanchor:hover {
     color: black;
     text-decoration: underline;
     font-size: 3vw;
-  
+
   }
 }
 
