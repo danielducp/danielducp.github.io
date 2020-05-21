@@ -3,8 +3,12 @@
 
 }
 
+.footertext{
+  padding-bottom: 10px;
+}
 body {
   background-color: #f0f0f0;
+  font-family: 'Roboto', sans-serif;
 }
 
 p {
@@ -213,8 +217,9 @@ a.custom-card:hover {
 }
 
 .leftimage {
-  width: 100%;
+  
   content: url("images/OfficialSite.jpg");
+  width: 100%;
 }
 
 @media only screen and (max-width:1280px) {
