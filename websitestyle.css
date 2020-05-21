@@ -86,6 +86,9 @@ a.custom-card:hover {
   font-size: 1.3vw;
 }
 
+.weather{
+  font-size: 1vw;
+}
 .left a {
   background-color: #e5e5e5;
   padding: 8px;
@@ -572,6 +575,9 @@ a.custom-card:hover {
   #eventsmobile {
     display: inline;
     align-items: center;
+  }
+  .weather{
+    font-size: 3vw;
   }
 }
 
